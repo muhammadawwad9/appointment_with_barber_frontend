@@ -1,0 +1,15 @@
+.title {
+  /* position: absolute; */
+  width: 235px;
+  height: 76px;
+  left: 83px;
+  top: 139px;
+
+  font-family: Ruslan Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 65px;
+
+  color: #376cba;
+}
