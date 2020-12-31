@@ -7,6 +7,7 @@ import Menu from "./components/Menu/Menu";
 //components
 import Buttons from "./components/Public/Buttons";
 import Card from "./components/Public/Card";
+import Login from "./components/Login/Login";
 
 function App() {
   const menuClick = () => {
@@ -15,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <h1>App component</h1>
+      <Login />
       {/* <Menu />
       <Navbar username="Nuwrss" menuClick={menuClick} />
       <Title title="LOG IN" />
