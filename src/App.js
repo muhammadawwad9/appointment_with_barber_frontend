@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <Login />
-      <Menu />
+      {/* <Menu />
       <Navbar username="Nuwrss" menuClick={menuClick} />
       {state == true ? <Menu menuClick={menuClick} /> : null}
 
@@ -29,7 +29,7 @@ function App() {
 
       <Buttons text="Login" />
       <Card businessName="cut pro" location="waze://tamra" avg="4.3" />
-      <Card businessName="perfect cut" location="waze://Kafr-Qara" avg="4.14" />
+     <Card businessName="perfect cut" location="waze://Kafr-Qara" avg="4.14" />*/}
     </div>
   );
 }
