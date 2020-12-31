@@ -4,14 +4,15 @@ import "./inputs.css";
 const Inputs = (props) => {
   return (
     <div className="container">
-      <img src={props.icon} alt={props.type} className="icon"></img>
+      <img src={props.icon} alt={props.type} className="icon" />
       <input
         className="inputTransparent"
         type={props.type}
-        id={props.type}
-        name={props.type}
+        id={props.id}
+        name={props.name}
         placeholder={props.placeholder}
         required
+        onChange={props.onChangeFunc}
       />
     </div>
   );

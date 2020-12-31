@@ -1,15 +1,11 @@
-.title {
-  /* position: absolute; */
-  width: 235px;
-  height: 76px;
-  left: 83px;
-  top: 139px;
+@import url("https://fonts.googleapis.com/css2?family=Ruslan+Display&display=swap");
 
-  font-family: Ruslan Display;
+.title {
+  font-family: "Ruslan Display", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 60px;
   line-height: 65px;
-
   color: #376cba;
+  text-align: center;
 }
