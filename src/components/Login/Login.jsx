@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { toast } from "react-toastify";
 import "./Login.css";
 //components
 import Title from "../Public/Title";
@@ -37,17 +37,18 @@ const Login = (props) => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(objToSend),
     })
-      .then((response) => {
-        if (response.ok) {
-          console.log("RESPONSE IS OK");
-          return response.json();
-        }
-        throw new Error(response.status);
-      })
+      .then((response) => response.json())
       .then((obj) => {
-        console.log("returned obj is: ", obj);
+        if (obj.access_token) {
+          console.log("THE OBJ IS: ", obj);
+          toast.success(obj.msg);
+        } else {
+          toast.error(obj);
+        }
       })
-      .catch((err) => console.log("ERRORRRR: ", err));
+      .catch((err) => {
+        console.error(err);
+      });
   };
   return (
     <div className="Login">

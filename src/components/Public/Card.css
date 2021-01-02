@@ -10,6 +10,7 @@
   height: 76.98px;
   background: #ffffff;
   border-radius: 70px 18.5px 18.5px 70px;
+  margin: auto;
   margin-top: 20px;
 }
 
@@ -20,6 +21,7 @@
   border: 2px solid #eb5757;
   box-sizing: border-box;
   border-radius: 70px;
+  left: 0px;
 }
 
 .business-name {

@@ -1,14 +1,18 @@
 import logo from "./logo.svg";
 import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+//components imports
 import Inputs from "./components/Public/Inputs";
 import Title from "./components/Public/Title";
 import Navbar from "./components/Navbar/Navbar";
 import Menu from "./components/Menu/Menu";
-
 import Buttons from "./components/Public/Buttons";
 import Card from "./components/Public/Card";
 import Login from "./components/Login/Login";
+import Businesses from "./components/Businesses/Businesses";
+toast.configure();
 
 function App() {
   const [state, setState] = React.useState(false);
@@ -20,7 +24,8 @@ function App() {
   return (
     <div className="App">
       <Login />
-      {/* <Menu />
+      {/* <Login />
+      <Menu />
       <Navbar username="Nuwrss" menuClick={menuClick} />
       {state == true ? <Menu menuClick={menuClick} /> : null}
 
@@ -29,7 +34,7 @@ function App() {
 
       <Buttons text="Login" />
       <Card businessName="cut pro" location="waze://tamra" avg="4.3" />
-     <Card businessName="perfect cut" location="waze://Kafr-Qara" avg="4.14" />*/}
+      <Card businessName="perfect cut" location="waze://Kafr-Qara" avg="4.14" />*/}
     </div>
   );
 }
