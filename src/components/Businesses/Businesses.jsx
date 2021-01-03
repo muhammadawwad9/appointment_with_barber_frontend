@@ -38,9 +38,10 @@ const Businesses = (props) => {
       />
       <h2>Barber shops available:</h2>
       <div className="businesses-list">
-        {businesses.map((business) => {
+        {businesses.map((business, i) => {
           return (
             <Card
+              key={i}
               businessName={business.businessname}
               location={business.geolocation}
               avg="3.5"

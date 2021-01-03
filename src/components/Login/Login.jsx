@@ -9,7 +9,7 @@ import Buttons from "../Public/Buttons";
 import Inputs from "../Public/Inputs";
 
 //Login component
-const Login = ({ isLoggedIn, setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, setUser }) => {
   //states
   const [objToSend, setObjToSend] = useState({
     pass: "",
@@ -42,9 +42,16 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
         console.log("THE OBJ IS: ", obj);
 
         if (obj.access_token) {
-          toast.success(obj.msg, {
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
+          toast.success(
+            "Welcome " +
+              obj.userObj.firstname[0].toUpperCase() +
+              obj.userObj.firstname.slice(1),
+            {
+              position: toast.POSITION.BOTTOM_CENTER,
+            }
+          );
+          setUser(obj.userObj);
+          localStorage.setItem("userObj", JSON.stringify(obj.userObj));
           localStorage.setItem("access_token", obj.access_token);
           setIsLoggedIn(true);
         } else {

@@ -1,6 +1,12 @@
 import logo from "./logo.svg";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
+  NavLink,
+} from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -12,15 +18,16 @@ import Menu from "./components/Menu/Menu";
 import Buttons from "./components/Public/Buttons";
 import Card from "./components/Public/Card";
 import Login from "./components/Login/Login";
-import Signup from "./components/Signup/Signup";
 import Businesses from "./components/Businesses/Businesses";
-import EditProfile from "./components/EditProfile/profile";
+import MyAppointments from "./components/MyAppointments/MyAppointments";
+import Signup from "./components/Signup/Signup";
 toast.configure();
 
 function App() {
   const [state, setState] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  //const [first]
 
   const menuClick = () => {
     console.log("clicked!");
@@ -28,24 +35,30 @@ function App() {
     console.log(state);
   };
 
-  console.log("STATE IS:  ", isLoggedIn);
+  console.log("isLoggedInnnnnnnnnnnn:  ", isLoggedIn);
 
   //useEffect, checking the local storage to see if the user is logged in
   useEffect(() => {
+    const userObj = localStorage.getItem("userObj");
     const access_token = window.localStorage.getItem("access_token");
-    if (access_token) setIsLoggedIn(true);
-    else setIsLoggedIn(false);
+    if (access_token) {
+      setUser(JSON.parse(userObj));
+      setIsLoggedIn(true);
+    } else setIsLoggedIn(false);
   }, [isLoggedIn]);
+
   return (
     <BrowserRouter>
       <Navbar
+        username={user.firstname}
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
-        username="Nuwrss"
         menuClick={menuClick}
       />
       {state == true ? (
         <Menu
+          isBusinessOwner={user.isBusinessOwner}
+          setUser={setUser}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
           menuClick={menuClick}
@@ -61,20 +74,18 @@ function App() {
             {isLoggedIn ? (
               <Redirect to="/getbusiness" />
             ) : (
-              <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+              <Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
             )}
           </Route>
           <Route exact path="/getbusiness">
-            <Businesses />
+            {isLoggedIn ? <Businesses /> : <Redirect exact to="/login" />}
           </Route>
-          <Route exact path="/editProfile">
-            <EditProfile />
+          <Route exact path="/myappointments">
+            {isLoggedIn ? <MyAppointments /> : <Redirect exact to="/login" />}
           </Route>
           <Route exact path="/signup">
             <Signup />
           </Route>
-          {/* <Navbar /> */}
-          <Businesses />
 
           {/*
       
