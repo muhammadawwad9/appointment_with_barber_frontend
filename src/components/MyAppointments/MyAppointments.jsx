@@ -8,7 +8,7 @@ import Buttons from "../Public/Buttons";
 import Inputs from "../Public/Inputs";
 
 //Login component
-const MyAppointments = ({ setIsLoggedIn, setUser }) => {
+const MyAppointments = (props) => {
   return (
     <div className="MyAppointments">
       <h1>MyAppointments component</h1>
