@@ -55,8 +55,6 @@ function App() {
           <Route exact path="/getbusiness">
             <Businesses />
           </Route>
-          <Navbar />
-          <Businesses />
 
           {/*
       
