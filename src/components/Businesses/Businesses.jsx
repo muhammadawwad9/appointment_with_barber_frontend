@@ -3,16 +3,18 @@ import "./Businesses.css";
 //components imports
 import Inputs from "../Public/Inputs";
 import Card from "../Public/Card";
+import api from "../api/api";
 
 const Businesses = (props) => {
-  const localServer = `http://localhost:4000/`;
   //states
   const [businesses, setBusinesses] = useState([]);
   const [insertedWord, setInsertedWord] = useState("");
   //useEffect
   useEffect(() => {
-    fetch(`${localServer}getbusiness/${insertedWord}`)
-      .then((response) => response.json())
+    api("getbusiness", {
+      headers: { token: localStorage.getItem("access_token") },
+      method: "GET",
+    })
       .then((businesses) => {
         setBusinesses(businesses);
       })

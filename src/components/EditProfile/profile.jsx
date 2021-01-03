@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import "./signup.css";
+import "./profile.css";
 import { useHistory } from "react-router-dom";
 
 //components
@@ -9,7 +9,7 @@ import Buttons from "../Public/Buttons";
 import Inputs from "../Public/Inputs";
 
 //Login component
-const Signup = () => {
+const EditProfile = () => {
   //states
   const history = useHistory();
   const [objToSend, setObjToSend] = useState({
@@ -17,7 +17,7 @@ const Signup = () => {
     phone: "",
     firstname: "",
     lastname: "",
-    pass: "",
+
     isBusinessOwner: false,
   });
 
@@ -38,17 +38,6 @@ const Signup = () => {
         break;
       case "lastname":
         setObjToSend({ ...objToSend, lastname: val });
-        break;
-      case "password":
-        setObjToSend({ ...objToSend, pass: val });
-        break;
-      case "business":
-        setObjToSend({ ...objToSend, isBusinessOwner: true });
-        console.log("business");
-        break;
-      case "client":
-        setObjToSend({ ...objToSend, isBusinessOwner: false });
-        console.log("client");
         break;
     }
   };
@@ -79,8 +68,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup">
-      <Title title="Sign Up" />
+    <div className="editProfile">
+      <Title title="Profile" />
       <form onSubmit={onSubmitHandler}>
         <Inputs
           type="email"
@@ -118,39 +107,11 @@ const Signup = () => {
           alt="lastname"
           onChangeFunc={onChangeHandler}
         />
-        <Inputs
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          icon="img/password.svg"
-          alt="password"
-          onChangeFunc={onChangeHandler}
-        />
 
-        <fieldset>
-          <legend>Register as</legend>
-          <label htmlFor="business">Business</label>
-          <input
-            type="radio"
-            name="register"
-            id="business"
-            value=""
-            onChange={onChangeHandler}
-          />
-          <label htmlFor="client">Client</label>
-          <input
-            type="radio"
-            name="register"
-            id="client"
-            value=""
-            onChange={onChangeHandler}
-          />
-        </fieldset>
-        <Buttons className="button" text="Sign up" />
+        <Buttons className="button" text="Save" />
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default EditProfile;

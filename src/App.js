@@ -14,6 +14,7 @@ import Card from "./components/Public/Card";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Businesses from "./components/Businesses/Businesses";
+import EditProfile from "./components/EditProfile/profile";
 toast.configure();
 
 function App() {
@@ -37,9 +38,19 @@ function App() {
   }, [isLoggedIn]);
   return (
     <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn} username="Nuwrss" menuClick={menuClick} />
+      <Navbar
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        username="Nuwrss"
+        menuClick={menuClick}
+      />
       {state == true ? (
-        <Menu isLoggedIn={isLoggedIn} menuClick={menuClick} />
+        <Menu
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          menuClick={menuClick}
+          setState={setState}
+        />
       ) : null}
       <div className="App">
         <Switch>
@@ -55,6 +66,9 @@ function App() {
           </Route>
           <Route exact path="/getbusiness">
             <Businesses />
+          </Route>
+          <Route exact path="/editProfile">
+            <EditProfile />
           </Route>
           <Route exact path="/signup">
             <Signup />
