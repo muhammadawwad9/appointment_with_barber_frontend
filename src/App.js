@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import React from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -22,10 +23,22 @@ function App() {
     console.log(state);
   };
   return (
-    <div className="App">
-      <Login />
-      {/* <Login />
-      <Menu />
+    <BrowserRouter>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="login" />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/getbusiness">
+            <Businesses />
+          </Route>
+          <Navbar />
+          <Businesses />
+
+          {/* <Menu />
       <Navbar username="Nuwrss" menuClick={menuClick} />
       {state == true ? <Menu menuClick={menuClick} /> : null}
 
@@ -35,7 +48,9 @@ function App() {
       <Buttons text="Login" />
       <Card businessName="cut pro" location="waze://tamra" avg="4.3" />
       <Card businessName="perfect cut" location="waze://Kafr-Qara" avg="4.14" />*/}
-    </div>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 

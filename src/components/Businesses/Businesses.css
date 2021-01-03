@@ -12,7 +12,7 @@
   font-size: 30px;
 }
 
-.container img {
+.Businesses .container img {
   order: 2;
   cursor: pointer;
 }
