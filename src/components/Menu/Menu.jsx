@@ -5,14 +5,17 @@ import "./style.css";
 
 const Menu = (props) => {
   const logOut = () => {
+    localStorage.removeItem("userObj");
     localStorage.removeItem("access_token");
+    props.setUser({});
     // setUser({});
-    toast.error(" نعيما يا غالي ترجعش عنا", {
+    toast.error(" نعيماً يا غالي ", {
       position: toast.POSITION.BOTTOM_CENTER,
     });
     props.setState(false);
     props.setIsLoggedIn(false);
   };
+
   const hide = () => {
     props.setState(false);
   };
@@ -29,45 +32,37 @@ const Menu = (props) => {
       </div>
       {props.isLoggedIn ? (
         <ul>
-          <li className="menuComponent">
-            <NavLink class="navlink" to="/" onClick={hide}>
-              Profile
-            </NavLink>
-          </li>
-          <li className="menuComponent">
-            <NavLink class="navlink" to="/" onClick={hide}>
-              Favorite Shops
-            </NavLink>
-          </li>
-          <li className="menuComponent">
-            <NavLink class="navlink" to="/" onClick={hide}>
-              My Appointments
-            </NavLink>
-          </li>
-          <li className="menuComponent">
-            <NavLink class="navlink" to="/" onClick={hide}>
-              My Businesses
-            </NavLink>
-          </li>
-          <li className="menuComponent">
-            {" "}
-            <NavLink class="navlink" to="/login" onClick={logOut}>
-              Log Out
-            </NavLink>
-          </li>
+          <NavLink className="navlink" to="/" onClick={hide}>
+            <li className="menuComponent">Profile</li>
+          </NavLink>
+
+          <NavLink className="navlink" to="/" onClick={hide}>
+            <li className="menuComponent">Favorite Shops</li>
+          </NavLink>
+
+          <NavLink className="navlink" to="/myappointments" onClick={hide}>
+            <li className="menuComponent">My Appointments</li>
+          </NavLink>
+
+          <NavLink className="navlink" to="/" onClick={hide}>
+            {props.isBusinessOwner ? (
+              <li className="menuComponent">My Businesses</li>
+            ) : null}
+          </NavLink>
+
+          <NavLink className="navlink" to="/login" onClick={logOut}>
+            <li className="menuComponent"> Log Out</li>
+          </NavLink>
         </ul>
       ) : (
         <ul>
-          <li className="menuComponent">
-            <NavLink class="navlink" to="/" onClick={hide}>
-              Login
-            </NavLink>
-          </li>
-          <li className="menuComponent">
-            <NavLink class="navlink" to="/" onClick={hide}>
-              Signup
-            </NavLink>
-          </li>{" "}
+          <NavLink className="navlink" to="/" onClick={hide}>
+            <li className="menuComponent">Login</li>
+          </NavLink>
+
+          <NavLink class="navlink" to="/" onClick={hide}>
+            <li className="menuComponent">Signup</li>
+          </NavLink>
         </ul>
       )}
     </div>
