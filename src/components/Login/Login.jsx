@@ -7,7 +7,7 @@ import Buttons from "../Public/Buttons";
 import Inputs from "../Public/Inputs";
 
 //Login component
-const Login = (props) => {
+const Login = ({ isLoggedIn, setIsLoggedIn }) => {
   //states
   const [objToSend, setObjToSend] = useState({
     pass: "",
@@ -42,6 +42,8 @@ const Login = (props) => {
         if (obj.access_token) {
           console.log("THE OBJ IS: ", obj);
           toast.success(obj.msg);
+          localStorage.setItem("access_token", obj.access_token);
+          setIsLoggedIn(true);
         } else {
           toast.error(obj);
         }

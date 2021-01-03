@@ -11,7 +11,7 @@ const Navbar = (props) => {
       ></img>
       <div className="navbarcontent">
         <p>We make your style</p>
-        <span>Hello, {props.username}</span>
+        {props.isLoggedIn ? <span>Hello, {props.username}</span> : null}
       </div>
       <img src="img/logo2.png" className="menubaricon"></img>
     </div>
