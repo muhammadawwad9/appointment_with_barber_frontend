@@ -12,6 +12,7 @@ import Menu from "./components/Menu/Menu";
 import Buttons from "./components/Public/Buttons";
 import Card from "./components/Public/Card";
 import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
 import Businesses from "./components/Businesses/Businesses";
 toast.configure();
 
@@ -55,7 +56,10 @@ function App() {
           <Route exact path="/getbusiness">
             <Businesses />
           </Route>
-          <Navbar />
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          {/* <Navbar /> */}
           <Businesses />
 
           {/*

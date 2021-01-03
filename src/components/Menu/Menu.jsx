@@ -22,7 +22,6 @@ const Menu = (props) => {
         </div>
       ) : (
         <div>
-          {" "}
           <div className="menuComponent">Login</div>
           <div className="menuComponent"> Signup</div>
         </div>
