@@ -30,3 +30,11 @@
   cursor: pointer;
   color: #0a3370;
 }
+
+.navlink {
+  text-decoration: none;
+}
+
+.navlink:visited {
+  color: #0a3370;
+}

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "./Login.css";
-//components
+//functions imports
+import api from "../api/api";
+//components imports
 import Title from "../Public/Title";
 import Buttons from "../Public/Buttons";
 import Inputs from "../Public/Inputs";
@@ -13,7 +15,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
     pass: "",
   });
 
-  const localServer = `http://localhost:4000/`;
   console.log(objToSend);
   //functions
   const onChangeHandler = (e) => {
@@ -32,24 +33,28 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad
     e.preventDefault();
-    fetch(`${localServer}login`, {
+    api("login", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(objToSend),
     })
-      .then((response) => response.json())
       .then((obj) => {
+        console.log("THE OBJ IS: ", obj);
+
         if (obj.access_token) {
-          console.log("THE OBJ IS: ", obj);
-          toast.success(obj.msg);
+          toast.success(obj.msg, {
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
           localStorage.setItem("access_token", obj.access_token);
           setIsLoggedIn(true);
         } else {
-          toast.error(obj);
+          toast.error(obj, {
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   };
   return (

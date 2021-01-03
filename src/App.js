@@ -36,9 +36,19 @@ function App() {
   }, [isLoggedIn]);
   return (
     <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn} username="Nuwrss" menuClick={menuClick} />
+      <Navbar
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        username="Nuwrss"
+        menuClick={menuClick}
+      />
       {state == true ? (
-        <Menu isLoggedIn={isLoggedIn} menuClick={menuClick} />
+        <Menu
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          menuClick={menuClick}
+          setState={setState}
+        />
       ) : null}
       <div className="App">
         <Switch>
