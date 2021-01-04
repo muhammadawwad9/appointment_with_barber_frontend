@@ -3,16 +3,18 @@ import "./Businesses.css";
 //components imports
 import Inputs from "../Public/Inputs";
 import Card from "../Public/Card";
+import api from "../api/api";
 
 const Businesses = (props) => {
-  const localServer = `http://localhost:4000/`;
   //states
   const [businesses, setBusinesses] = useState([]);
   const [insertedWord, setInsertedWord] = useState("");
   //useEffect
   useEffect(() => {
-    fetch(`${localServer}getbusiness/${insertedWord}`)
-      .then((response) => response.json())
+    api(`getbusiness/${insertedWord}`, {
+      headers: { token: localStorage.getItem("access_token") },
+      method: "GET",
+    })
       .then((businesses) => {
         setBusinesses(businesses);
       })
@@ -36,9 +38,10 @@ const Businesses = (props) => {
       />
       <h2>Barber shops available:</h2>
       <div className="businesses-list">
-        {businesses.map((business) => {
+        {businesses.map((business, i) => {
           return (
             <Card
+              key={i}
               businessName={business.businessname}
               location={business.geolocation}
               avg="3.5"

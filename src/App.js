@@ -1,6 +1,12 @@
 import logo from "./logo.svg";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
+  NavLink,
+} from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -13,32 +19,52 @@ import Buttons from "./components/Public/Buttons";
 import Card from "./components/Public/Card";
 import Login from "./components/Login/Login";
 import Businesses from "./components/Businesses/Businesses";
+import MyAppointments from "./components/MyAppointments/MyAppointments";
+import Signup from "./components/Signup/Signup";
+import EditProfile from "./components/EditProfile/profile";
 toast.configure();
 
 function App() {
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
+  console.log("user in app component is: ", user);
   const menuClick = () => {
     console.log("clicked!");
     setState(!state);
     console.log(state);
   };
 
-  console.log("STATE IS:  ", isLoggedIn);
+  console.log("isLoggedInnnnnnnnnnnn:  ", isLoggedIn);
 
   //useEffect, checking the local storage to see if the user is logged in
   useEffect(() => {
+    const userObj = localStorage.getItem("userObj");
     const access_token = window.localStorage.getItem("access_token");
-    if (access_token) setIsLoggedIn(true);
-    else setIsLoggedIn(false);
-  }, [isLoggedIn]);
+    if (access_token) {
+      setUser(JSON.parse(userObj));
+      setIsLoggedIn(true);
+    } else setIsLoggedIn(false);
+  }, []);
+
   return (
     <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn} username="Nuwrss" menuClick={menuClick} />
+      <Navbar
+        username={user.firstname}
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        menuClick={menuClick}
+      />
       {state == true ? (
-        <Menu isLoggedIn={isLoggedIn} menuClick={menuClick} />
+        <Menu
+          isBusinessOwner={user.isBusinessOwner}
+          setUser={setUser}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          menuClick={menuClick}
+          setState={setState}
+        />
       ) : null}
       <div className="App">
         <Switch>
@@ -49,14 +75,25 @@ function App() {
             {isLoggedIn ? (
               <Redirect to="/getbusiness" />
             ) : (
-              <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+              <Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
             )}
           </Route>
           <Route exact path="/getbusiness">
-            <Businesses />
+            {isLoggedIn ? <Businesses /> : <Redirect exact to="/login" />}
           </Route>
-          <Navbar />
-          <Businesses />
+          <Route exact path="/myappointments">
+            {isLoggedIn ? (
+              <MyAppointments user={user} setUser={setUser} />
+            ) : (
+              <Redirect exact to="/login" />
+            )}
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/editprofile">
+            <EditProfile />
+          </Route>
 
           {/*
       
