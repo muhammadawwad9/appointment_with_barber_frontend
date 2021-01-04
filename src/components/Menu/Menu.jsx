@@ -32,7 +32,7 @@ const Menu = (props) => {
       </div>
       {props.isLoggedIn ? (
         <ul>
-          <NavLink className="navlink" to="/" onClick={hide}>
+          <NavLink className="navlink" to="/editprofile" onClick={hide}>
             <li className="menuComponent">Profile</li>
           </NavLink>
 
