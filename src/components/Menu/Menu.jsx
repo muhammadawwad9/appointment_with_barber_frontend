@@ -12,11 +12,21 @@ const Menu = (props) => {
           onClick={props.menuClick}
         ></img>
       </div>
-      <div className="menuComponent">Profile</div>
-      <div className="menuComponent">Favorite Shops</div>
-      <div className="menuComponent">My Appointments</div>
-      <div className="menuComponent">My Businesses</div>
-      <div className="menuComponent">Logout</div>
+      {props.isLoggedIn ? (
+        <div>
+          <div className="menuComponent">Profile</div>
+          <div className="menuComponent">Favorite Shops</div>
+          <div className="menuComponent">My Appointments</div>
+          <div className="menuComponent">My Businesses</div>
+          <div className="menuComponent">Logout</div>
+        </div>
+      ) : (
+        <div>
+          {" "}
+          <div className="menuComponent">Login</div>
+          <div className="menuComponent"> Signup</div>
+        </div>
+      )}
     </div>
   );
 };
