@@ -8,7 +8,7 @@ import Title from "../Public/Title";
 import Card from "../Public/Card";
 
 //Login component
-const MyAppointments = ({ user }) => {
+const MyAppointments = ({ user, setUser }) => {
   //states
   const [businesses, setBusinesses] = useState([]);
   console.log("businesses is: ", businesses);
@@ -41,10 +41,13 @@ const MyAppointments = ({ user }) => {
           return (
             <Card
               key={i}
-              favCard={true}
+              id={appointment.businessId}
+              apCard={true}
               businessName={getBusinessNameById(appointment.businessId)}
-              date={appointment.date}
+              day={appointment.date}
+              month={appointment.month}
               hour={appointment.hour}
+              setUser={setUser}
             />
           );
         })}

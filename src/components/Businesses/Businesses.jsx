@@ -11,7 +11,7 @@ const Businesses = (props) => {
   const [insertedWord, setInsertedWord] = useState("");
   //useEffect
   useEffect(() => {
-    api("getbusiness", {
+    api(`getbusiness/${insertedWord}`, {
       headers: { token: localStorage.getItem("access_token") },
       method: "GET",
     })

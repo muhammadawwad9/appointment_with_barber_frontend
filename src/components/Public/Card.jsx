@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Card.css";
-const Card = ({ businessName, location, avg, favCard, date, hour }) => {
+//functions imports
+import api from "../api/api";
+const Card = ({
+  businessName,
+  location,
+  avg,
+  apCard,
+  month,
+  day,
+  hour,
+  id,
+  setUser,
+}) => {
+  //states
   //fuctions
   const favToggle = (e) => {
     if (e.target.classList.contains("empty")) {
@@ -12,8 +25,35 @@ const Card = ({ businessName, location, avg, favCard, date, hour }) => {
     }
   };
 
+  const deleteAppointment = () => {
+    let userObjTest = JSON.parse(localStorage.getItem("userObj"));
+    console.log("TEEEEEST", userObjTest);
+    api("appointment", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        token: localStorage.getItem("access_token"),
+      },
+      body: JSON.stringify({
+        day: month + "/" + day,
+        hour: hour,
+        businessId: id,
+      }),
+    })
+      .then((appointments) => {
+        console.log("PARSED RESPOOOONSE: ", appointments);
+        let userObj = JSON.parse(localStorage.getItem("userObj"));
+        console.log("after extracting from local storage(parsed): ", userObj);
+        userObj.myAppointments = appointments.myappointments;
+        console.log("after updating from local storage(parsed): ", userObj);
+        console.log("stringified: ", JSON.stringify(userObj));
+        localStorage.setItem("userObj", JSON.stringify(userObj));
+      })
+      .catch((err) => console.error(err));
+  };
+
   {
-    return !favCard ? (
+    return !apCard ? (
       <div className="card">
         <img
           className="profile-pic"
@@ -41,9 +81,14 @@ const Card = ({ businessName, location, avg, favCard, date, hour }) => {
         />
         <h3 className="business-name-fav">{businessName}</h3>
         <h3 className="time">
-          August/{date}, {hour}
+          {month[0].toUpperCase() + month.slice(1, 3)}, {day}, {hour}
         </h3>
-        <img className="delete-icon" src="img/trash.svg" alt="delete" />
+        <img
+          className="delete-icon"
+          src="img/trash.svg"
+          alt="delete"
+          onClick={deleteAppointment}
+        />
         <img className="edit-icon" src="img/edit.svg" alt="edit" />
         <div className="edge"></div>
       </div>
