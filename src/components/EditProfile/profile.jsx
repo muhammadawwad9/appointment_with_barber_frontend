@@ -79,9 +79,11 @@ const EditProfile = () => {
       .then((obj) => {
         console.log("objeect:  ", obj);
 
-        if (obj.phone) {
-          localStorage.setItem("userObj", JSON.stringify(obj));
+        if (obj.userObj) {
+          localStorage.setItem("userObj", JSON.stringify(obj.userObj));
+          localStorage.setItem("access_token", obj.access_token);
           userObj = JSON.parse(localStorage.getItem("userObj"));
+
           toast.success("Successfully Updated ", {
             position: toast.POSITION.BOTTOM_CENTER,
           });
@@ -109,7 +111,20 @@ const EditProfile = () => {
       },
       body: JSON.stringify(passObj),
     })
-      .then((res) => res.json().then((json) => console.log(json)))
+      .then((res) =>
+        res.json().then((json) => {
+          if (json.phone) {
+            toast.success("Password updated Successfully", {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          } else {
+            toast.error(json, {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          }
+          console.log(json);
+        })
+      )
       .catch((err) => console.log(err));
   };
 
@@ -168,7 +183,7 @@ const EditProfile = () => {
         {hidePass ? (
           <div>
             <Inputs
-              type="text"
+              type="password"
               id="oldpass"
               name="oldpass"
               placeholder="Old Password"
