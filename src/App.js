@@ -21,10 +21,11 @@ import Login from "./components/Login/Login";
 import Businesses from "./components/Businesses/Businesses";
 import MyAppointments from "./components/MyAppointments/MyAppointments";
 import Signup from "./components/Signup/Signup";
+import EditProfile from "./components/EditProfile/profile";
 toast.configure();
 
 function App() {
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   //const [first]
@@ -85,6 +86,9 @@ function App() {
           </Route>
           <Route exact path="/signup">
             <Signup />
+          </Route>
+          <Route exact path="/editprofile">
+            <EditProfile />
           </Route>
 
           {/*
