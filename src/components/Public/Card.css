@@ -81,3 +81,48 @@
   left: 97px;
   top: 52px;
 }
+
+/*fav card*/
+
+.fav-card {
+  position: relative;
+  width: 311px;
+  height: 76.98px;
+  background: #ffffff;
+  border-radius: 70px 18.5px 18.5px 70px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.business-name-fav {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-40%);
+  color: #114b5f;
+}
+
+.time {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-40%);
+  color: #114b5f;
+}
+
+.delete-icon {
+  position: absolute;
+  left: 85%;
+  transform: translateX(-2px);
+  top: 10px;
+  width: 23px;
+  height: 23px;
+}
+
+.edit-icon {
+  position: absolute;
+  left: 85%;
+  top: 40px;
+  width: 23px;
+  height: 23px;
+}

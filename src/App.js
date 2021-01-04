@@ -27,8 +27,7 @@ function App() {
   const [state, setState] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-  //const [first]
-
+  console.log("user in app component is: ", user);
   const menuClick = () => {
     console.log("clicked!");
     setState(!state);
@@ -81,7 +80,11 @@ function App() {
             {isLoggedIn ? <Businesses /> : <Redirect exact to="/login" />}
           </Route>
           <Route exact path="/myappointments">
-            {isLoggedIn ? <MyAppointments /> : <Redirect exact to="/login" />}
+            {isLoggedIn ? (
+              <MyAppointments user={user} />
+            ) : (
+              <Redirect exact to="/login" />
+            )}
           </Route>
           <Route exact path="/signup">
             <Signup />

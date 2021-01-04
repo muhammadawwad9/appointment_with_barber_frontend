@@ -9,7 +9,7 @@ const Menu = (props) => {
     localStorage.removeItem("access_token");
     props.setUser({});
     // setUser({});
-    toast.error(" نعيماً يا غالي ", {
+    toast.error("Good Bye", {
       position: toast.POSITION.BOTTOM_CENTER,
     });
     props.setState(false);
