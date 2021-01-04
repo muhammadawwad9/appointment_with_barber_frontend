@@ -34,9 +34,13 @@ const MyAppointments = ({ user, setUser }) => {
   {
     return user.myAppointments == null ||
       JSON.parse(user.myAppointments).length === 0 ? (
-      <h1 className="msg">You Have No Appointments Yet</h1>
+      <div className="MyAppointments">
+        <Title title="My Appointments" />
+        <h1 className="msg">You Have No Appointments Yet</h1>
+      </div>
     ) : (
       <div className="MyAppointments">
+        <Title title="My Appointments" />
         {JSON.parse(user.myAppointments).map((appointment, i) => {
           return (
             <Card
