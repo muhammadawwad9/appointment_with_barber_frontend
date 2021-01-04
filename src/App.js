@@ -28,6 +28,7 @@ function App() {
   const [state, setState] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+
   console.log("user in app component is: ", user);
   const menuClick = () => {
     console.log("clicked!");
@@ -45,7 +46,7 @@ function App() {
       setUser(JSON.parse(userObj));
       setIsLoggedIn(true);
     } else setIsLoggedIn(false);
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <BrowserRouter>
@@ -82,7 +83,7 @@ function App() {
           </Route>
           <Route exact path="/myappointments">
             {isLoggedIn ? (
-              <MyAppointments user={user} />
+              <MyAppointments user={user} setUser={setUser} />
             ) : (
               <Redirect exact to="/login" />
             )}
