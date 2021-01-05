@@ -11,7 +11,7 @@ import Card from "../Public/Card";
 const MyAppointments = ({ user, setUser }) => {
   //states
   const [businesses, setBusinesses] = useState([]);
-  console.log("businesses is: ", businesses);
+  // console.log("businesses is: ", businesses);
 
   //functions
   const getBusinessNameById = (id) => {

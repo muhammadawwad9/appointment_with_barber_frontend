@@ -46,15 +46,15 @@ const Signup = () => {
         break;
       case "business":
         setObjToSend({ ...objToSend, isBusinessOwner: true });
-        console.log("business");
+        // console.log("business");
         break;
       case "client":
         setObjToSend({ ...objToSend, isBusinessOwner: false });
-        console.log("client");
+        // console.log("client");
         break;
     }
   };
-  console.log(objToSend);
+  // console.log(objToSend);
   //functions
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad

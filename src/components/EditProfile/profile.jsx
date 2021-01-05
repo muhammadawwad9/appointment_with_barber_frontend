@@ -31,7 +31,7 @@ const EditProfile = () => {
     setHidePass(!hidePass);
   };
 
-  console.log(userObj);
+  // console.log(userObj);
   const localServer = `http://localhost:4000/`;
 
   //functions
@@ -58,8 +58,8 @@ const EditProfile = () => {
         break;
     }
   };
-  console.log("halaaaaa", objToSend);
-  console.log("nuwraaasssss", userObj);
+  // console.log("halaaaaa", objToSend);
+  // console.log("nuwraaasssss", userObj);
   //functions
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad
@@ -83,13 +83,13 @@ const EditProfile = () => {
             position: toast.POSITION.BOTTOM_CENTER,
           });
         } else {
-          toast.error(obj, {
+          toast.error(response, {
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       })
       .catch((err) => {
-        console.log("Im in catch");
+        // console.log("Im in catch");
         console.error(err);
       });
 
@@ -148,7 +148,7 @@ const EditProfile = () => {
               position: toast.POSITION.BOTTOM_CENTER,
             });
           } else {
-            toast.error(json, {
+            toast.error(response, {
               position: toast.POSITION.BOTTOM_CENTER,
             });
           }

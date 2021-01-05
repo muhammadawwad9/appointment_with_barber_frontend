@@ -1,0 +1,30 @@
+.BusinessPage .title {
+  font-size: 34px;
+}
+
+.BusinessPage .location-icon {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 100px;
+  top: 46%;
+  opacity: 1;
+}
+
+.BusinessPage .phone-icon {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 100px;
+  top: 55px;
+}
+
+.scissors {
+  width: 100%;
+}
+
+.BusinessPage .favorite-icon {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+}

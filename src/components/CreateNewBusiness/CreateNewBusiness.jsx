@@ -38,11 +38,11 @@ const CreateNewBusiness = (props) => {
       },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setDefultBus(response); // here we get the bus from the server by his id
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -64,8 +64,8 @@ const CreateNewBusiness = (props) => {
         break;
     }
   };
-  console.log("halaaaaa", objToSend);
-  console.log("nuwraaasssss", userObj);
+  // console.log("halaaaaa", objToSend);
+  // console.log("nuwraaasssss", userObj);
   //functions
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad
@@ -88,7 +88,7 @@ const CreateNewBusiness = (props) => {
       body: JSON.stringify(objToSend),
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.userObj) {
           localStorage.setItem("userObj", JSON.stringify(response.userObj));
           userObj = JSON.parse(localStorage.getItem("userObj"));
@@ -103,7 +103,7 @@ const CreateNewBusiness = (props) => {
         }
       })
       .catch((err) => {
-        console.log("Im in catch");
+        // console.log("Im in catch");
         console.error(err);
       });
   };

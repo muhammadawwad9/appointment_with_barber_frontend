@@ -47,6 +47,7 @@ const Businesses = ({ user, setUser }) => {
               location={business.geolocation}
               avg="3.5"
               user={user}
+              setUser={setUser}
             />
           );
         })}

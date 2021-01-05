@@ -23,6 +23,7 @@ import MyAppointments from "./components/MyAppointments/MyAppointments";
 import Signup from "./components/Signup/Signup";
 import EditProfile from "./components/EditProfile/profile";
 import MyFavorites from "./components/MyFavorites/MyFavorites";
+import BusinessPage from "./components/BusinessPage/BusinessPage";
 toast.configure();
 
 function App() {
@@ -30,15 +31,15 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
-  console.log("IS LOGGED IN : ", isLoggedIn);
-  console.log("user in app component is: ", user);
+  // console.log("IS LOGGED IN : ", isLoggedIn);
+  // console.log("user in app component is: ", user);
   const menuClick = () => {
-    console.log("clicked!");
+    // console.log("clicked!");
     setState(!state);
-    console.log(state);
+    // console.log(state);
   };
 
-  console.log("isLoggedInnnnnnnnnnnn:  ", isLoggedIn);
+  // console.log("isLoggedInnnnnnnnnnnn:  ", isLoggedIn);
 
   //useEffect, checking the local storage to see if the user is logged in
   useEffect(() => {
@@ -103,6 +104,13 @@ function App() {
           <Route exact path="/myfavorites">
             {isLoggedIn ? (
               <MyFavorites user={user} setUser={setUser} />
+            ) : (
+              <Redirect exact to="/login" />
+            )}
+          </Route>
+          <Route exact path="/businesspage/:id">
+            {isLoggedIn ? (
+              <BusinessPage user={user} setUser={setUser} />
             ) : (
               <Redirect exact to="/login" />
             )}
