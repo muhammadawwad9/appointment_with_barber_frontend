@@ -1,0 +1,53 @@
+.addEditBusiness {
+  display: flex;
+  flex-direction: column;
+}
+.addEditBusiness form {
+  display: flex;
+  flex-direction: column;
+}
+.addEditBusiness form select {
+  width: 40%;
+  margin: auto;
+}
+.choosemonth {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+#weekinfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 200px;
+  margin-top: 40px;
+}
+
+.weekdays {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.starthour {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.endhour {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.day {
+  border: 1px solid black;
+  margin-top: 10px;
+}
+.starthour {
+  border: 1px solid black;
+  margin-top: 10px;
+}
+.endhour {
+  border: 1px solid black;
+  margin-top: 10px;
+}
