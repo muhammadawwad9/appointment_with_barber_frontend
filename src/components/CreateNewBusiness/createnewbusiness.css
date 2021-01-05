@@ -26,5 +26,14 @@
 .dayinfo {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
+}
+.dayinfo div {
+  width: 100px;
+}
+.starthour {
+  width: 80px !important;
+}
+.endhour {
+  width: 80px !important;
 }
