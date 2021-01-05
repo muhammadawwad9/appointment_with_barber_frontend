@@ -33,16 +33,16 @@ function setDayWorkingHours(year, month, workingHours, numOfDay, nameOfDay) {
 function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
 }
+let nameDays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 function make() {
-  let nameDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
   return (
     <div>
       {nameDays.map((elemnt, index) => {
@@ -164,6 +164,7 @@ function make() {
 const CreateNewBusiness = (props) => {
   //states
   const history = useHistory();
+  const [openHoursObj, setOpenHoursObj] = useState({});
   const [defultBus, setDefultBus] = useState({
     businessname: "",
     ownerid: "",
@@ -220,6 +221,7 @@ const CreateNewBusiness = (props) => {
         break;
     }
   };
+
   console.log("halaaaaa", objToSend);
   console.log("nuwraaasssss", userObj);
   //functions
