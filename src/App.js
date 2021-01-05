@@ -81,7 +81,11 @@ function App() {
             )}
           </Route>
           <Route exact path="/getbusiness">
-            {isLoggedIn ? <Businesses /> : <Redirect exact to="/login" />}
+            {isLoggedIn ? (
+              <Businesses user={user} setUser={setUser} />
+            ) : (
+              <Redirect exact to="/login" />
+            )}
           </Route>
           <Route exact path="/myappointments">
             {isLoggedIn ? (

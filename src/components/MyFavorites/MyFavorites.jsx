@@ -55,6 +55,7 @@ const MyFavorites = ({ user, setUser }) => {
               location={getBusinessById(favorite).geolocation}
               avg={4.7}
               setUser={setUser}
+              user={user}
             />
           );
         })}

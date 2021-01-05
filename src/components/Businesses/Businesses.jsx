@@ -5,7 +5,7 @@ import Inputs from "../Public/Inputs";
 import Card from "../Public/Card";
 import api from "../api/api";
 
-const Businesses = (props) => {
+const Businesses = ({ user, setUser }) => {
   //states
   const [businesses, setBusinesses] = useState([]);
   const [insertedWord, setInsertedWord] = useState("");
@@ -42,9 +42,11 @@ const Businesses = (props) => {
           return (
             <Card
               key={i}
+              id={business.id}
               businessName={business.businessname}
               location={business.geolocation}
               avg="3.5"
+              user={user}
             />
           );
         })}
