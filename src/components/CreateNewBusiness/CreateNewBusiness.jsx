@@ -12,6 +12,28 @@ import { logDOM } from "@testing-library/react";
 let userObj = JSON.parse(localStorage.getItem("userObj"));
 //Login component
 
+function setDayWorkingHours(year, month, workingHours, numOfDay, nameOfDay) {
+  // numofday is the day in database
+  var d = new Date(year, month, 0);
+
+  var getTot = daysInMonth(d.getMonth(), d.getFullYear()); //Get total days in a month
+  for (var i = 1; i <= getTot; i++) {
+    //looping through days in month
+    var newDate = new Date(d.getFullYear(), d.getMonth(), i);
+    if (newDate.getDay() == nameOfDay) {
+      //if Sunday
+      // here we can set the working hours for the day example all sundays days
+      // we can make object for this day
+    }
+  }
+
+  // here we can return for all days that nameofday the same object working hours
+  // thats include the working hours for all sundays for example
+}
+function daysInMonth(month, year) {
+  return new Date(year, month, 0).getDate();
+}
+
 const CreateNewBusiness = (props) => {
   //states
   const history = useHistory();
