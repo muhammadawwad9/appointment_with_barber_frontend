@@ -24,6 +24,7 @@ import Signup from "./components/Signup/Signup";
 import EditProfile from "./components/EditProfile/profile";
 import MyFavorites from "./components/MyFavorites/MyFavorites";
 import BusinessPage from "./components/BusinessPage/BusinessPage";
+import CreateNewBusiness from "./components/CreateNewBusiness/CreateNewBusiness";
 toast.configure();
 
 function App() {
@@ -101,6 +102,10 @@ function App() {
           <Route exact path="/editprofile">
             {isLoggedIn ? <EditProfile /> : <Redirect exact to="/login" />}
           </Route>
+          {/* we hav to remember to correct this route */}
+          <Route exact path="/editAddBusiness">
+            {isLoggedIn ? <CreateNewBusiness /> : <CreateNewBusiness />}
+          </Route>
           <Route exact path="/myfavorites">
             {isLoggedIn ? (
               <MyFavorites user={user} setUser={setUser} />
@@ -129,7 +134,6 @@ function App() {
             location="waze://Kafr-Qara"
             avg="4.14"
           />
-          */
         </Switch>
       </div>
     </BrowserRouter>
