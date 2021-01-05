@@ -79,9 +79,11 @@ const EditProfile = () => {
       .then((obj) => {
         console.log("objeect:  ", obj);
 
-        if (obj.phone) {
-          localStorage.setItem("userObj", JSON.stringify(obj));
+        if (obj.userObj) {
+          localStorage.setItem("userObj", JSON.stringify(obj.userObj));
+          localStorage.setItem("access_token", obj.access_token);
           userObj = JSON.parse(localStorage.getItem("userObj"));
+
           toast.success("Successfully Updated ", {
             position: toast.POSITION.BOTTOM_CENTER,
           });
@@ -98,19 +100,38 @@ const EditProfile = () => {
         console.error(err);
       });
   };
-
+  var strongRegex = new RegExp("^(?=.{8,})");
   const onSubmitPassHandler = (e) => {
     e.preventDefault();
-    fetch(`${localServer}updateUserPassword/`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        token: localStorage.getItem("access_token"),
-      },
-      body: JSON.stringify(passObj),
-    })
-      .then((res) => res.json().then((json) => console.log(json)))
-      .catch((err) => console.log(err));
+    if (!passObj.newPassword.match(strongRegex)) {
+      toast.error("Password must contain at least 8 or more characters", {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    } else {
+      fetch(`${localServer}updateUserPassword/`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          token: localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(passObj),
+      })
+        .then((res) =>
+          res.json().then((json) => {
+            if (json.phone) {
+              toast.success("Password updated Successfully", {
+                position: toast.POSITION.BOTTOM_CENTER,
+              });
+            } else {
+              toast.error(json, {
+                position: toast.POSITION.BOTTOM_CENTER,
+              });
+            }
+            console.log(json);
+          })
+        )
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -160,7 +181,7 @@ const EditProfile = () => {
 
         <Buttons className="button" text="Save" />
       </form>
-      <button onClick={handleHidePass}>
+      <button className="passchange" onClick={handleHidePass}>
         <div> change password </div>
       </button>
       <form onSubmit={onSubmitPassHandler}>
@@ -168,7 +189,7 @@ const EditProfile = () => {
         {hidePass ? (
           <div>
             <Inputs
-              type="text"
+              type="password"
               id="oldpass"
               name="oldpass"
               placeholder="Old Password"
@@ -185,7 +206,7 @@ const EditProfile = () => {
               alt="newpass"
               onChangeFunc={onChangeHandler}
             />
-            <Buttons className="button" text="change password" />
+            <Buttons text="change password" />
           </div>
         ) : null}
       </form>
