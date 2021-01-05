@@ -83,7 +83,7 @@ const EditProfile = () => {
             position: toast.POSITION.BOTTOM_CENTER,
           });
         } else {
-          toast.error(obj, {
+          toast.error(response, {
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
@@ -148,7 +148,7 @@ const EditProfile = () => {
               position: toast.POSITION.BOTTOM_CENTER,
             });
           } else {
-            toast.error(json, {
+            toast.error(response, {
               position: toast.POSITION.BOTTOM_CENTER,
             });
           }
