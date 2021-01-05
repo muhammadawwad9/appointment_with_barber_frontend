@@ -27,7 +27,7 @@ const Card = ({
 
   const deleteAppointment = () => {
     let userObjTest = JSON.parse(localStorage.getItem("userObj"));
-    console.log("TEEEEEST", userObjTest);
+    console.log("after TEEEEEEST from local storage(parsed): ", userObjTest);
     api("appointment", {
       method: "DELETE",
       headers: {
@@ -41,13 +41,15 @@ const Card = ({
       }),
     })
       .then((appointments) => {
-        console.log("PARSED RESPOOOONSE: ", appointments);
+        // console.log("PARSED RESPOOOONSE: ", appointments);
         let userObj = JSON.parse(localStorage.getItem("userObj"));
-        console.log("after extracting from local storage(parsed): ", userObj);
+        // console.log("after extracting from local storage(parsed): ", userObj);
         userObj.myAppointments = appointments.myappointments;
-        console.log("after updating from local storage(parsed): ", userObj);
-        console.log("stringified: ", JSON.stringify(userObj));
+
+        // console.log("after updating from local storage(parsed): ", userObj);
+        // console.log("stringified: ", JSON.stringify(userObj));
         localStorage.setItem("userObj", JSON.stringify(userObj));
+        setUser(userObj);
       })
       .catch((err) => console.error(err));
   };
@@ -64,12 +66,22 @@ const Card = ({
         <img className="location-icon" src="img/location.svg" />
         <h3 className="location">{location}</h3>
         <h3 className="avg">{avg}/5</h3>
-        <img
-          className="favorite-icon empty"
-          src="img/emptystar.svg"
-          alt=""
-          onClick={favToggle}
-        />
+        {!window.location.href == "myfavorites" ? (
+          <img
+            className="favorite-icon empty"
+            src="img/emptystar.svg"
+            alt=""
+            onClick={favToggle}
+          />
+        ) : (
+          <img
+            className="favorite-icon "
+            src="img/filledstar.svg"
+            alt=""
+            onClick={favToggle}
+          />
+        )}
+
         <div className="edge"></div>
       </div>
     ) : (

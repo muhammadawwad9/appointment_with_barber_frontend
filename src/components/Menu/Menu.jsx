@@ -36,7 +36,7 @@ const Menu = (props) => {
             <li className="menuComponent">Profile</li>
           </NavLink>
 
-          <NavLink className="navlink" to="/" onClick={hide}>
+          <NavLink className="navlink" to="/myfavorites" onClick={hide}>
             <li className="menuComponent">Favorite Shops</li>
           </NavLink>
 

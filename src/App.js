@@ -22,6 +22,7 @@ import Businesses from "./components/Businesses/Businesses";
 import MyAppointments from "./components/MyAppointments/MyAppointments";
 import Signup from "./components/Signup/Signup";
 import EditProfile from "./components/EditProfile/profile";
+import MyFavorites from "./components/MyFavorites/MyFavorites";
 toast.configure();
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
+  console.log("IS LOGGED IN : ", isLoggedIn);
   console.log("user in app component is: ", user);
   const menuClick = () => {
     console.log("clicked!");
@@ -92,19 +94,30 @@ function App() {
             <Signup />
           </Route>
           <Route exact path="/editprofile">
-            <EditProfile />
+            {isLoggedIn ? <EditProfile /> : <Redirect exact to="/login" />}
           </Route>
-
-          {/*
-      
-      
-
-      <Title title="LOG IN" />
-  
-      <Inputs icon="img/profile-user.svg" type="email" placeholder="email" />
-      <Buttons text="Login" />
-      <Card businessName="cut pro" location="waze://tamra" avg="4.3" />
-      <Card businessName="perfect cut" location="waze://Kafr-Qara" avg="4.14" />*/}
+          <Route exact path="/myfavorites">
+            {isLoggedIn ? (
+              <MyFavorites user={user} setUser={setUser} />
+            ) : (
+              <Redirect exact to="/login" />
+            )}
+          </Route>
+          <Route render={() => <Redirect to="/login" />} />
+          <Title title="LOG IN" />
+          <Inputs
+            icon="img/profile-user.svg"
+            type="email"
+            placeholder="email"
+          />
+          <Buttons text="Login" />
+          <Card businessName="cut pro" location="waze://tamra" avg="4.3" />
+          <Card
+            businessName="perfect cut"
+            location="waze://Kafr-Qara"
+            avg="4.14"
+          />
+          */
         </Switch>
       </div>
     </BrowserRouter>
