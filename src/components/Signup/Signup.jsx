@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "./signup.css";
 import { useHistory } from "react-router-dom";
+//functions imports
+import api from "../api/api";
 
 //components
 import Title from "../Public/Title";
@@ -57,25 +59,42 @@ const Signup = () => {
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad
     e.preventDefault();
-    fetch(`${localServer}signup`, {
+
+    api("signup", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(objToSend),
     })
-      .then((response) => response.json())
-      .then((obj) => {
-        console.log("objeect:  ", obj);
-        if (obj.message) {
+      .then((respone) => {
+        if (respone.message) {
           history.push("/login");
         } else {
-          toast.error(obj, {
+          toast.error(respone, {
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch((err) => console.error(err));
+
+    // fetch(`${localServer}signup`, {
+    //   method: "POST",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(objToSend),
+    // })
+    //   .then((response) => response.json())
+    //   .then((obj) => {
+    //     console.log("objeect:  ", obj);
+    //     if (obj.message) {
+    //       history.push("/login");
+    //     } else {
+    //       toast.error(obj, {
+    //         position: toast.POSITION.BOTTOM_CENTER,
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   };
 
   return (

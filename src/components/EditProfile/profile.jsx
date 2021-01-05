@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "./profile.css";
 import { useHistory } from "react-router-dom";
+import api from "../api/api";
 
 //components
 import Title from "../Public/Title";
@@ -64,7 +65,7 @@ const EditProfile = () => {
     //missing validation in this function I will do it later- Awwad
     e.preventDefault();
 
-    fetch(`${localServer}updateUser/`, {
+    api("updateUser/", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -73,23 +74,15 @@ const EditProfile = () => {
       body: JSON.stringify(objToSend),
     })
       .then((response) => {
-        console.log("Im heerreee");
-        return response.json();
-      })
-      .then((obj) => {
-        console.log("objeect:  ", obj);
-
-        if (obj.userObj) {
-          localStorage.setItem("userObj", JSON.stringify(obj.userObj));
-          localStorage.setItem("access_token", obj.access_token);
+        if (response.userObj) {
+          localStorage.setItem("userObj", JSON.stringify(response.userObj));
+          localStorage.setItem("access_token", response.access_token);
           userObj = JSON.parse(localStorage.getItem("userObj"));
 
           toast.success("Successfully Updated ", {
             position: toast.POSITION.BOTTOM_CENTER,
           });
-          console.log("obj1111", obj);
         } else {
-          console.log("obj222", obj);
           toast.error(obj, {
             position: toast.POSITION.BOTTOM_CENTER,
           });
@@ -99,6 +92,39 @@ const EditProfile = () => {
         console.log("Im in catch");
         console.error(err);
       });
+
+    // fetch(`${localServer}updateUser/`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     token: localStorage.getItem("access_token"),
+    //   },
+    //   body: JSON.stringify(objToSend),
+    // })
+
+    //   .then((obj) => {
+    //     console.log("objeect:  ", obj);
+
+    //     if (obj.userObj) {
+    //       localStorage.setItem("userObj", JSON.stringify(obj.userObj));
+    //       localStorage.setItem("access_token", obj.access_token);
+    //       userObj = JSON.parse(localStorage.getItem("userObj"));
+
+    //       toast.success("Successfully Updated ", {
+    //         position: toast.POSITION.BOTTOM_CENTER,
+    //       });
+    //       console.log("obj1111", obj);
+    //     } else {
+    //       console.log("obj222", obj);
+    //       toast.error(obj, {
+    //         position: toast.POSITION.BOTTOM_CENTER,
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("Im in catch");
+    //     console.error(err);
+    //   });
   };
   var strongRegex = new RegExp("^(?=.{8,})");
   const onSubmitPassHandler = (e) => {
@@ -108,7 +134,7 @@ const EditProfile = () => {
         position: toast.POSITION.BOTTOM_CENTER,
       });
     } else {
-      fetch(`${localServer}updateUserPassword/`, {
+      api("updateUserPassword/", {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -116,21 +142,42 @@ const EditProfile = () => {
         },
         body: JSON.stringify(passObj),
       })
-        .then((res) =>
-          res.json().then((json) => {
-            if (json.phone) {
-              toast.success("Password updated Successfully", {
-                position: toast.POSITION.BOTTOM_CENTER,
-              });
-            } else {
-              toast.error(json, {
-                position: toast.POSITION.BOTTOM_CENTER,
-              });
-            }
-            console.log(json);
-          })
-        )
-        .catch((err) => console.log(err));
+        .then((response) => {
+          if (response.phone) {
+            toast.success("Password updated Successfully", {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          } else {
+            toast.error(json, {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          }
+        })
+        .catch((err) => console.error(err));
+
+      // fetch(`${localServer}updateUserPassword/`, {
+      //   method: "PUT",
+      //   headers: {
+      //     "content-type": "application/json",
+      //     token: localStorage.getItem("access_token"),
+      //   },
+      //   body: JSON.stringify(passObj),
+      // })
+      //   .then((res) =>
+      //     res.json().then((json) => {
+      //       if (json.phone) {
+      //         toast.success("Password updated Successfully", {
+      //           position: toast.POSITION.BOTTOM_CENTER,
+      //         });
+      //       } else {
+      //         toast.error(json, {
+      //           position: toast.POSITION.BOTTOM_CENTER,
+      //         });
+      //       }
+      //       console.log(json);
+      //     })
+      //   )
+      //   .catch((err) => console.log(err));
     }
   };
 
