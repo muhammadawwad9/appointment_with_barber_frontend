@@ -17,37 +17,23 @@
 }
 #weekinfo {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
-  height: 200px;
+
   margin-top: 40px;
 }
 
-.weekdays {
+.dayinfo {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
-
-.starthour {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-.endhour {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-.day {
-  border: 1px solid black;
-  margin-top: 10px;
+.dayinfo div {
+  width: 100px;
 }
 .starthour {
-  border: 1px solid black;
-  margin-top: 10px;
+  width: 80px !important;
 }
 .endhour {
-  border: 1px solid black;
-  margin-top: 10px;
+  width: 80px !important;
 }

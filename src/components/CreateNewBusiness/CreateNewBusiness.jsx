@@ -12,26 +12,91 @@ import { logDOM } from "@testing-library/react";
 let userObj = JSON.parse(localStorage.getItem("userObj"));
 //Login component
 
-function setDayWorkingHours(year, month, workingHours, numOfDay, nameOfDay) {
+function setDayWorkingHours(
+  year,
+  month,
+  workingHours,
+  numOfDay,
+  nameOfDay,
+  isWorking,
+  diff,
+  allDays
+) {
   // numofday is the day in database
-  var d = new Date(year, month, 0);
 
-  var getTot = daysInMonth(d.getMonth(), d.getFullYear()); //Get total days in a month
-  for (var i = 1; i <= getTot; i++) {
+  let monthnum = 0;
+  switch (month) {
+    case "January":
+      monthnum = 0;
+      break;
+
+    case "February":
+      monthnum = 1;
+      break;
+    case "March":
+      monthnum = 2;
+      break;
+    case "April":
+      monthnum = 3;
+      break;
+    case "May":
+      monthnum = 4;
+      break;
+    case "June":
+      monthnum = 5;
+      break;
+    case "July":
+      monthnum = 6;
+      break;
+    case "August":
+      monthnum = 7;
+      break;
+    case "September":
+      monthnum = 8;
+      break;
+    case "October":
+      monthnum = 9;
+      break;
+    case "November":
+      monthnum = 10;
+      break;
+    case "December":
+      monthnum = 11;
+      break;
+  }
+  console.log(monthnum);
+  var d = new Date();
+  d.setFullYear(year, monthnum, 1);
+
+  //   var d = new Date(year, monthnum, 0);
+  console.log(d.getMonth());
+  console.log(d.getFullYear());
+
+  var numOfDays = daysInMonth(d.getMonth(), d.getFullYear()); //Get total days in a month
+  console.log(numOfDays);
+
+  for (var i = 1; i <= numOfDays; i++) {
     //looping through days in month
     var newDate = new Date(d.getFullYear(), d.getMonth(), i);
-    if (newDate.getDay() == nameOfDay) {
+    const nameInWeek = nameDays[newDate.getDay()];
+
+    if (nameInWeek == nameOfDay) {
       //if Sunday
       // here we can set the working hours for the day example all sundays days
       // we can make object for this day
+      let worktimeObj = {
+        daynum: i,
+        workinghours: workingHours,
+        isworking: isWorking,
+        diff: diff,
+      };
+      allDays.push(worktimeObj);
     }
   }
+  return allDays;
 
   // here we can return for all days that nameofday the same object working hours
   // thats include the working hours for all sundays for example
-}
-function daysInMonth(month, year) {
-  return new Date(year, month, 0).getDate();
 }
 let nameDays = [
   "Sunday",
@@ -42,6 +107,58 @@ let nameDays = [
   "Friday",
   "Saturday",
 ];
+function checkAllDays() {
+  // going over all days to get the ids with start and end hours
+
+  let allDays = [];
+  let someThingWrong = false;
+  const monthname = document.getElementById("month").value;
+  const calendar = {
+    month: monthname,
+    days: "",
+  };
+  console.log(monthname);
+  nameDays.map((elemnt, index) => {
+    let isworking = false;
+    const startHourElement = document.getElementById(index + "_starthour");
+    const endHourElement = document.getElementById(index + "_endhour");
+    const endHour = endHourElement.value;
+    const startHour = startHourElement.value;
+    if (
+      Date.parse("01/01/2011 " + endHour) >
+      Date.parse("01/01/2011 " + startHour)
+    ) {
+      isworking = true;
+    } else {
+      isworking = false;
+    }
+    const hoursobj = {
+      start: startHour,
+      end: endHour,
+    };
+    const wh = [];
+    wh.push(hoursobj);
+
+    allDays = setDayWorkingHours(
+      2021,
+      monthname,
+      wh,
+      "numOfDay",
+      elemnt,
+      isworking,
+      30,
+      allDays
+    );
+  });
+  console.log(allDays);
+  calendar.days = allDays;
+  return calendar;
+}
+
+function daysInMonth(month, year) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
 function make() {
   return (
     <div>
@@ -49,8 +166,8 @@ function make() {
         return (
           <div id={index} className="dayinfo">
             <div className="dayname">{nameDays[index]}</div>
-            <div id={index + "_starthour"} className="starthour">
-              <select>
+            <div className="starthour">
+              <select id={index + "_starthour"} className="starthour">
                 <option value="00:00">00:00 </option>
                 <option value="00:30">00:30 </option>
                 <option value="1:00">1:00 </option>
@@ -102,8 +219,8 @@ function make() {
               </select>
             </div>
 
-            <div id={index + "_endhour"} className="endhour">
-              <select>
+            <div className="endhour">
+              <select id={index + "_endhour"} className="endhour">
                 <option value="00:00">00:00 </option>
                 <option value="00:30">00:30 </option>
                 <option value="1:00">1:00 </option>
@@ -164,7 +281,6 @@ function make() {
 const CreateNewBusiness = (props) => {
   //states
   const history = useHistory();
-  const [openHoursObj, setOpenHoursObj] = useState({});
   const [defultBus, setDefultBus] = useState({
     businessname: "",
     ownerid: "",
@@ -195,11 +311,11 @@ const CreateNewBusiness = (props) => {
       },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setDefultBus(response); // here we get the bus from the server by his id
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -221,14 +337,16 @@ const CreateNewBusiness = (props) => {
         break;
     }
   };
-
-  console.log("halaaaaa", objToSend);
-  console.log("nuwraaasssss", userObj);
+  // console.log("halaaaaa", objToSend);
+  // console.log("nuwraaasssss", userObj);
   //functions
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad
     e.preventDefault();
+    checkAllDays();
+    objToSend.calendar = checkAllDays();
 
+    console.log(objToSend);
     // we have to update or add a new business its depends on the props.busID
 
     if (props.busID) {
@@ -246,7 +364,7 @@ const CreateNewBusiness = (props) => {
       body: JSON.stringify(objToSend),
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.userObj) {
           localStorage.setItem("userObj", JSON.stringify(response.userObj));
           userObj = JSON.parse(localStorage.getItem("userObj"));
@@ -261,7 +379,7 @@ const CreateNewBusiness = (props) => {
         }
       })
       .catch((err) => {
-        console.log("Im in catch");
+        // console.log("Im in catch");
         console.error(err);
       });
   };
@@ -321,9 +439,9 @@ const CreateNewBusiness = (props) => {
 
         <div id="weekinfo">
           <div className="dayinfo">
-            <div className="day">Week days:</div>
-            <div className="starthour">Start hour:</div>
-            <div className="endhour">End hour:</div>
+            <div>Week days:</div>
+            <div>Start hour:</div>
+            <div>End hour:</div>
           </div>
           {make()}
         </div>

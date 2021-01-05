@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink, withRouter } from "react-router-dom";
+
 import "./style.css";
 
 const Navbar = (props) => {
@@ -18,7 +20,10 @@ const Navbar = (props) => {
           </span>
         ) : null}
       </div>
-      <img src="img/logo2.png" className="menubaricon"></img>
+      <NavLink exact to="/getbusiness">
+        {" "}
+        <img src="img/logo2.png" className="menubaricon"></img>
+      </NavLink>
     </div>
   );
 };
