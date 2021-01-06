@@ -48,3 +48,22 @@
 .msg {
   margin-top: 40px;
 }
+
+.square {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  background-color: #eee;
+}
+
+.days-names {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2px;
+  row-gap: 30px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}

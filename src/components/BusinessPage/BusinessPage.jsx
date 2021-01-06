@@ -17,6 +17,23 @@ const BusinessPage = ({ user, setUser }) => {
   const [selectVal, setSelectVal] = useState(null);
   const [days, setDays] = useState([]);
   const [msg, setMsg] = useState(null);
+  const [day1, setDay1] = useState(0);
+  const daysObj = {
+    0: "Su",
+    1: "Mo",
+    2: "Tu",
+    3: "We",
+    4: "Th",
+    5: "Fr",
+    6: "Sa",
+    7: "Su",
+    8: "Mo",
+    9: "Tu",
+    10: "We",
+    11: "Th",
+    12: "Fr",
+    13: "Sa",
+  };
 
   // console.log("selectVAAAAAAAAAAAAAAL: ", selectVal);
   //functions
@@ -80,9 +97,10 @@ const BusinessPage = ({ user, setUser }) => {
       })
       .catch((err) => console.error(err));
   }, []);
-
   useEffect(() => {
     if (selectVal != null) {
+      let firstDay = new Date(`${selectVal} 1, 2021 23:15:30`);
+      setDay1(firstDay.getDay());
       api(`calendar/${selectVal}_${businessId}`, {
         headers: { token: localStorage.getItem("access_token") },
       })
@@ -175,6 +193,11 @@ const BusinessPage = ({ user, setUser }) => {
           <h2 className="msg">{msg}</h2>
         ) : (
           <div className="days">
+            <div className="days-names">
+              {[0, 1, 2, 3, 4, 5, 6].map((elem) => {
+                return <div className="square">{daysObj[day1 + elem]}</div>;
+              })}
+            </div>
             {days.map((day, i) => {
               return (
                 <DayBox
