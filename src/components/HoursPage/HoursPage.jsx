@@ -15,6 +15,10 @@ const HoursPage = () => {
   const month = window.location.pathname.split("/")[3];
   const businessId = window.location.pathname.split("/")[4];
   const calendarName = month + "_" + businessId;
+  // console.log("dayNum: ", dayNum);
+  // console.log("month: ", month);
+  // console.log("business id: ", businessId);
+  // console.log("calendar name: ", calendarName);
   console.log("STATESTATE: ", emptyHoursArr);
   //functions
   //this function returns the sum of an hour plus minutes
@@ -38,8 +42,6 @@ const HoursPage = () => {
     return finalTime;
   };
 
-  console.log("HEREEEEEEE", addMinutesToHour("10:40", 20));
-
   //useEffect (to get the calendar for that business in the given month)
   useEffect(() => {
     api(`calendar/${calendarName}`, {
@@ -51,6 +53,7 @@ const HoursPage = () => {
         const workingHours = JSON.parse(wantedDay.workinghours);
         const appointments = JSON.parse(wantedDay.appointments);
         const diff = wantedDay.diff;
+        // const diff = 30;
         const emptyHoursArr = [];
         if (!appointments) {
           for (let i = 0; i < workingHours.length; i++) {
@@ -59,29 +62,39 @@ const HoursPage = () => {
               Date.parse(`01/01/2011 ${start}`) <
               Date.parse(`01/01/2011 ${workingHours[i].end}`)
             ) {
+              console.log("empty hours array(before): ", emptyHoursArr);
               emptyHoursArr.push(start);
+              console.log("empty hours array(after): ", emptyHoursArr);
+
               start = addMinutesToHour(start, diff);
             }
           }
         } else {
           for (let i = 0; i < workingHours.length; i++) {
             let start = workingHours[i].start;
+            // console.log(i, start);
             let ok = true;
             while (
               Date.parse(`01/01/2011 ${start}`) <
               Date.parse(`01/01/2011 ${workingHours[i].end}`)
             ) {
               for (let i = 0; i < appointments.length; i++) {
+                // console.log(i, start, appointments[i].hour);
+
                 if (
-                  Date.parse(`01/01/2011 ${appointments.hour}`) ==
+                  Date.parse(`01/01/2011 ${appointments[i].hour}`) ==
                   Date.parse(`01/01/2011 ${start}`)
                 ) {
+                  console.log("taken, and the hour is: ", appointments[i]);
+                  // console.log(i);
                   ok = false;
-                  break;
                 }
-              }
-              if (ok) {
-                emptyHoursArr.push(start);
+                if (ok) {
+                  console.log("2 empty hours array(before): ", emptyHoursArr);
+                  emptyHoursArr.push(start);
+                  console.log("2 empty hours array(after): ", emptyHoursArr);
+                }
+                ok = true;
               }
               start = addMinutesToHour(start, diff);
             }

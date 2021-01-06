@@ -29,10 +29,20 @@
   top: 20px;
 }
 
-.just-for-testing {
-  position: absolute;
+.BusinessPage select {
+  position: relative;
   left: 50%;
+  top: 15px;
   transform: translateX(-50%);
-  top: 250px;
-  text-align: center;
+  font-size: 23px;
+}
+
+.days {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 40px;
+}
+
+.msg {
+  margin-top: 40px;
 }
