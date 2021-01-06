@@ -169,9 +169,11 @@ function make(objToSend) {
     <div className="timesection">
       {nameDays.map((elemnt, index) => {
         return (
-          <div id={index} className="dayinfo">
-            <div className="dayname">{nameDays[index]}</div>
-            <div className="starthour">
+          <div key={"00:0022" + index} id={index} className="dayinfo">
+            <div key={"00:0022" + index} className="dayname">
+              {nameDays[index]}
+            </div>
+            <div key={"00:0023" + index} className="starthour">
               <select
                 key={index + "_starthour"}
                 id={index + "_starthour"}
@@ -324,7 +326,7 @@ function make(objToSend) {
               </select>
             </div>
 
-            <div className="endhour">
+            <div key={"00:0024" + index} className="endhour">
               <select
                 key={index + "_endhour"}
                 id={index + "_endhour"}
