@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import uuid from "react-uuid";
 import "./HoursPage.css";
 //functions imports
 import api from "../api/api";
@@ -10,12 +11,16 @@ import HourBox from "../Public/HourBox";
 
 const HoursPage = () => {
   //states
+  const [changes, setChanges] = useState(1);
   const [emptyHoursArr, setEmptyHoursArr] = useState([]);
   const dayNum = window.location.pathname.split("/")[2];
   const month = window.location.pathname.split("/")[3];
   const businessId = window.location.pathname.split("/")[4];
   const calendarName = month + "_" + businessId;
-  const calendarNameToSend = month + "/" + businessId;
+  const calendarNameToSend =
+    month +
+    "/" +
+    dayNum; /*here is the error, we were sending +businessID and not +dayNum (in line 18)*/
 
   // console.log("dayNum: ", dayNum);
   // console.log("month: ", month);
@@ -64,9 +69,9 @@ const HoursPage = () => {
               Date.parse(`01/01/2011 ${start}`) <
               Date.parse(`01/01/2011 ${workingHours[i].end}`)
             ) {
-              // console.log("empty hours array(before): ", emptyHoursArr);
+              console.log("empty hours array(before): ", emptyHoursArr);
               emptyHoursArr.push(start);
-              // console.log("empty hours array(after): ", emptyHoursArr);
+              console.log("empty hours array(after): ", emptyHoursArr);
 
               start = addMinutesToHour(start, diff);
             }
@@ -91,13 +96,14 @@ const HoursPage = () => {
                   // console.log(i);
                   ok = false;
                 }
-                if (ok) {
-                  // console.log("2 empty hours array(before): ", emptyHoursArr);
-                  emptyHoursArr.push(start);
-                  // console.log("2 empty hours array(after): ", emptyHoursArr);
-                }
-                ok = true;
               }
+              if (ok) {
+                console.log("OKKKKK");
+                console.log("2 empty hours array(before): ", emptyHoursArr);
+                emptyHoursArr.push(start);
+                console.log("2 empty hours array(after): ", emptyHoursArr);
+              }
+              ok = true;
               start = addMinutesToHour(start, diff);
             }
           }
@@ -105,9 +111,13 @@ const HoursPage = () => {
         setEmptyHoursArr(emptyHoursArr);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [changes]);
 
-  return (
+  console.log("empty hours array: ", emptyHoursArr);
+
+  return emptyHoursArr.length == 0 ? (
+    <HourBox full={true} />
+  ) : (
     <div className="HoursPage">
       <h1 className="date">
         {dayNum}, {month[0].toUpperCase()}
@@ -117,7 +127,8 @@ const HoursPage = () => {
         {emptyHoursArr.map((hour, i) => {
           return (
             <HourBox
-              key={hour}
+              setChanges={setChanges}
+              key={uuid()}
               hour={hour}
               calendarName={calendarNameToSend}
               businessId={businessId}

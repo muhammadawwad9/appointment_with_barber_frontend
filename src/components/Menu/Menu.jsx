@@ -44,7 +44,7 @@ const Menu = (props) => {
             <li className="menuComponent">My Appointments</li>
           </NavLink>
 
-          <NavLink className="navlink" to="/editAddBusiness" onClick={hide}>
+          <NavLink className="navlink" to="/mybusinesses" onClick={hide}>
             {props.isBusinessOwner ? (
               <li className="menuComponent">My Businesses</li>
             ) : null}

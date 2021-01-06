@@ -7,7 +7,7 @@ const Navbar = (props) => {
   return (
     <div className="navbar">
       <img
-        src="img/menu.svg"
+        src="/img/menu.svg"
         className="menubaricon"
         onClick={props.menuClick}
       ></img>
@@ -22,7 +22,7 @@ const Navbar = (props) => {
       </div>
       <NavLink exact to="/getbusiness">
         {" "}
-        <img src="img/logo2.png" className="menubaricon"></img>
+        <img src="/img/logo2.png" className="menubaricon"></img>
       </NavLink>
     </div>
   );

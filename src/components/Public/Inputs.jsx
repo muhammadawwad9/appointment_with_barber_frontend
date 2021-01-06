@@ -9,6 +9,9 @@ const Inputs = (props) => {
       // props.onChangeFunc();
     }
   };
+  React.useEffect(() => {
+    setState(props.value);
+  }, [props.value]);
   return (
     <div className="container">
       <img src={props.icon} alt={props.type} className="icon" />

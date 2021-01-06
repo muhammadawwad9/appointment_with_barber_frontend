@@ -5,9 +5,11 @@ import Inputs from "../Public/Inputs";
 import MyBusinessCard from "../Public/MyBusinessCard";
 import api from "../api/api";
 import Title from "../Public/Title";
+import { NavLink, withRouter } from "react-router-dom";
 
 const MyBusinesses = () => {
   //states
+  const handleClick = () => {};
   const [businesses, setBusinesses] = useState([]);
   //useEffect
   useEffect(() => {
@@ -25,6 +27,10 @@ const MyBusinesses = () => {
   return (
     <div className="Businesses">
       <Title title="My businesses" />
+      <NavLink className="navlink" to="/editAddBusiness">
+        <div className="addbussiness">Add Business</div>
+      </NavLink>
+
       <div className="businesses-list">
         {businesses.map((business, i) => {
           return (

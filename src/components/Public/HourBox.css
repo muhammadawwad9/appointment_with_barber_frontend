@@ -5,6 +5,13 @@
   border-radius: 2px;
   font-size: 20px;
   color: #000000;
-  text-align: center;
   margin: 0px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-available {
+  text-align: center;
+  margin-top: 20px;
 }

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import "./HourBox.css";
 
 //functions imports
 import api from "../api/api";
 
-const HourBox = ({ hour, calendarName, businessId }) => {
+const HourBox = ({ hour, calendarName, businessId, setChanges, full }) => {
+  console.log("FULLL: ", full);
+  //functions
   const clickHandler = () => {
     const obj = {
       day: calendarName,
@@ -24,10 +27,16 @@ const HourBox = ({ hour, calendarName, businessId }) => {
     })
       .then((appointments) => {
         console.log("you appointments are: ", appointments);
+        toast.success("The Appointment is Set ", {
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+        setChanges((prev) => !prev);
       })
       .catch((err) => console.log(err));
   };
-  return (
+  return full ? (
+    <h2 className="not-available">No Hours Available</h2>
+  ) : (
     <div onClick={clickHandler} className="HourBox">
       {hour}
     </div>
