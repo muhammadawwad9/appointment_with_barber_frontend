@@ -1,0 +1,10 @@
+.HourBox {
+  width: 100px;
+  height: 30px;
+  background: #c4c4c4;
+  border-radius: 2px;
+  font-size: 20px;
+  color: #000000;
+  text-align: center;
+  margin: auto;
+}
