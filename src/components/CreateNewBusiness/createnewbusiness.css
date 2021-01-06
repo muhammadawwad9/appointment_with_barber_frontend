@@ -18,9 +18,9 @@
 #weekinfo {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .dayinfo {
@@ -36,4 +36,14 @@
 }
 .endhour {
   width: 80px !important;
+}
+.timediffence {
+  margin-top: 20px;
+}
+.timesection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 180px;
+  color: #14051d;
 }
