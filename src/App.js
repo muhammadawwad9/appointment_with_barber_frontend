@@ -115,6 +115,9 @@ function App() {
           <Route exact path="/editAddBusiness/:id">
             {isLoggedIn ? <CreateNewBusiness /> : <CreateNewBusiness />}
           </Route>
+          <Route exact path="/editAddBusiness">
+            {isLoggedIn ? <CreateNewBusiness /> : <CreateNewBusiness />}
+          </Route>
           <Route exact path="/myfavorites">
             {isLoggedIn ? (
               <MyFavorites user={user} setUser={setUser} />
