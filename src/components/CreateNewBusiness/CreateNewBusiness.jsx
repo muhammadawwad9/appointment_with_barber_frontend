@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "./createnewbusiness.css";
 import { useHistory } from "react-router-dom";
@@ -74,7 +74,7 @@ function setDayWorkingHours(
 
   var numOfDays = daysInMonth(d.getMonth(), d.getFullYear()); //Get total days in a month
   console.log(numOfDays);
-
+  diff = document.getElementById("timediff").value;
   for (var i = 1; i <= numOfDays; i++) {
     //looping through days in month
     var newDate = new Date(d.getFullYear(), d.getMonth(), i);
@@ -166,114 +166,314 @@ function make(objToSend) {
   //   const daysWithNames = getTheDaysWithNamesFromCalendar(objToSend.calendar.days,objToSend.calendar.month);
 
   return (
-    <div>
+    <div className="timesection">
       {nameDays.map((elemnt, index) => {
         return (
           <div id={index} className="dayinfo">
             <div className="dayname">{nameDays[index]}</div>
             <div className="starthour">
-              <select id={index + "_starthour"} className="starthour">
-                <option value="00:00">00:00 </option>
-                <option value="00:30">00:30 </option>
-                <option value="1:00">1:00 </option>
-                <option value="1:30">1:30 </option>
-                <option value="2:00">2:00 </option>
-                <option value="2:30">2:30 </option>
-                <option value="3:00">3:00 </option>
-                <option value="3:30">3:30 </option>
-                <option value="4:00">4:00 </option>
-                <option value="4:30">4:30 </option>
-                <option value="5:00">5:00 </option>
-                <option value="5:30">5:30 </option>
-                <option value="6:00">6:00 </option>
-                <option value="6:30">6:30 </option>
-                <option value="7:00">7:00 </option>
-                <option value="7:30">7:30 </option>
-                <option value="8:00">8:00 </option>
-                <option value="8:30">8:30 </option>
-                <option value="9:00">9:00 </option>
-                <option value="9:30">9:30 </option>
-                <option value="10:00">10:00 </option>
-                <option value="10:30">10:30 </option>
-                <option value="11:00">11:00 </option>
-                <option value="11:30">11:30 </option>
-                <option value="12:00">12:00 </option>
-                <option value="12:30">12:30 </option>
-                <option value="13:00">13:00 </option>
-                <option value="13:30">13:30 </option>
-                <option value="14:00">14:00 </option>
-                <option value="14:30">14:30 </option>
-                <option value="15:00">15:00 </option>
-                <option value="15:30">15:30 </option>
-                <option value="16:00">16:00 </option>
-                <option value="16:30">16:30 </option>
-                <option value="17:00">17:00 </option>
-                <option value="17:30">17:30 </option>
-                <option value="18:00">18:00 </option>
-                <option value="18:30">18:30 </option>
-                <option value="19:00">19:00 </option>
-                <option value="19:30">19:30 </option>
-                <option value="20:00">20:00 </option>
-                <option value="20:30">20:30 </option>
-                <option value="21:00">21:00 </option>
-                <option value="21:30">21:30 </option>
-                <option value="22:00">22:00 </option>
-                <option value="22:30">22:30 </option>
-                <option value="23:00">23:00 </option>
-                <option value="23:30">23:30 </option>
+              <select
+                key={index + "_starthour"}
+                id={index + "_starthour"}
+                className="starthour"
+              >
+                <option key={"00:001" + index} value="00:00">
+                  00:00
+                </option>
+                <option key={"00:301" + index} value="00:30">
+                  00:30{" "}
+                </option>
+                <option key={"1:001" + index} value="1:00">
+                  1:00{" "}
+                </option>
+                <option key={"1:301" + index} value="1:30">
+                  1:30{" "}
+                </option>
+                <option key={"2:001" + index} value="2:00">
+                  2:00{" "}
+                </option>
+                <option key={"2:301" + index} value="2:30">
+                  2:30{" "}
+                </option>
+                <option key={"3:001" + index} value="3:00">
+                  3:00{" "}
+                </option>
+                <option key={"3:301" + index} value="3:30">
+                  3:30{" "}
+                </option>
+                <option key={"4:001" + index} value="4:00">
+                  4:00{" "}
+                </option>
+                <option key={"4:301" + index} value="4:30">
+                  4:30{" "}
+                </option>
+                <option key={"5:001" + index} value="5:00">
+                  5:00{" "}
+                </option>
+                <option key={"5:301" + index} value="5:30">
+                  5:30{" "}
+                </option>
+                <option key={"6:001" + index} value="6:00">
+                  6:00{" "}
+                </option>
+                <option key={"6:301" + index} value="6:30">
+                  6:30{" "}
+                </option>
+                <option key={"7:001" + index} value="7:00">
+                  7:00{" "}
+                </option>
+                <option key={"7:301" + index} value="7:30">
+                  7:30{" "}
+                </option>
+                <option key={"8:001" + index} value="8:00">
+                  8:00{" "}
+                </option>
+                <option key={"8:301" + index} value="8:30">
+                  8:30{" "}
+                </option>
+                <option key={"9:001" + index} value="9:00">
+                  9:00{" "}
+                </option>
+                <option key={"9:301" + index} value="9:30">
+                  9:30{" "}
+                </option>
+                <option key={"10:001" + index} value="10:00">
+                  10:00{" "}
+                </option>
+                <option key={"10:301" + index} value="10:30">
+                  10:30{" "}
+                </option>
+                <option key={"11:001" + index} value="11:00">
+                  11:00{" "}
+                </option>
+                <option key={"11:301" + index} value="11:30">
+                  11:30{" "}
+                </option>
+                <option key={"12:001" + index} value="12:00">
+                  12:00{" "}
+                </option>
+                <option key={"12:301" + index} value="12:30">
+                  12:30{" "}
+                </option>
+                <option key={"13:001" + index} value="13:00">
+                  13:00{" "}
+                </option>
+                <option key={"13:301" + index} value="13:30">
+                  13:30{" "}
+                </option>
+                <option key={"14:001" + index} value="14:00">
+                  14:00{" "}
+                </option>
+                <option key={"14:301" + index} value="14:30">
+                  14:30{" "}
+                </option>
+                <option key={"15:001" + index} value="15:00">
+                  15:00{" "}
+                </option>
+                <option key={"15:301" + index} value="15:30">
+                  15:30{" "}
+                </option>
+                <option key={"16:001" + index} value="16:00">
+                  16:00{" "}
+                </option>
+                <option key={"16:301" + index} value="16:30">
+                  16:30{" "}
+                </option>
+                <option key={"17:001" + index} value="17:00">
+                  17:00{" "}
+                </option>
+                <option key={"17:301" + index} value="17:30">
+                  17:30{" "}
+                </option>
+                <option key={"18:001" + index} value="18:00">
+                  18:00{" "}
+                </option>
+                <option key={"18:301" + index} value="18:30">
+                  18:30{" "}
+                </option>
+                <option key={"19:001" + index} value="19:00">
+                  19:00{" "}
+                </option>
+                <option key={"19:301" + index} value="19:30">
+                  19:30{" "}
+                </option>
+                <option key={"20:001" + index} value="20:00">
+                  20:00{" "}
+                </option>
+                <option key={"20:301" + index} value="20:30">
+                  20:30{" "}
+                </option>
+                <option key={"21:001" + index} value="21:00">
+                  21:00{" "}
+                </option>
+                <option key={"21:301" + index} value="21:30">
+                  21:30{" "}
+                </option>
+                <option key={"22:001" + index} value="22:00">
+                  22:00{" "}
+                </option>
+                <option key={"22:301" + index} value="22:30">
+                  22:30{" "}
+                </option>
+                <option key={"23:001" + index} value="23:00">
+                  23:00{" "}
+                </option>
+                <option key={"23:301" + index} value="23:30">
+                  23:30{" "}
+                </option>
               </select>
             </div>
 
             <div className="endhour">
-              <select id={index + "_endhour"} className="endhour">
-                <option value="00:00">00:00 </option>
-                <option value="00:30">00:30 </option>
-                <option value="1:00">1:00 </option>
-                <option value="1:30">1:30 </option>
-                <option value="2:00">2:00 </option>
-                <option value="2:30">2:30 </option>
-                <option value="3:00">3:00 </option>
-                <option value="3:30">3:30 </option>
-                <option value="4:00">4:00 </option>
-                <option value="4:30">4:30 </option>
-                <option value="5:00">5:00 </option>
-                <option value="5:30">5:30 </option>
-                <option value="6:00">6:00 </option>
-                <option value="6:30">6:30 </option>
-                <option value="7:00">7:00 </option>
-                <option value="7:30">7:30 </option>
-                <option value="8:00">8:00 </option>
-                <option value="8:30">8:30 </option>
-                <option value="9:00">9:00 </option>
-                <option value="9:30">9:30 </option>
-                <option value="10:00">10:00 </option>
-                <option value="10:30">10:30 </option>
-                <option value="11:00">11:00 </option>
-                <option value="11:30">11:30 </option>
-                <option value="12:00">12:00 </option>
-                <option value="12:30">12:30 </option>
-                <option value="13:00">13:00 </option>
-                <option value="13:30">13:30 </option>
-                <option value="14:00">14:00 </option>
-                <option value="14:30">14:30 </option>
-                <option value="15:00">15:00 </option>
-                <option value="15:30">15:30 </option>
-                <option value="16:00">16:00 </option>
-                <option value="16:30">16:30 </option>
-                <option value="17:00">17:00 </option>
-                <option value="17:30">17:30 </option>
-                <option value="18:00">18:00 </option>
-                <option value="18:30">18:30 </option>
-                <option value="19:00">19:00 </option>
-                <option value="19:30">19:30 </option>
-                <option value="20:00">20:00 </option>
-                <option value="20:30">20:30 </option>
-                <option value="21:00">21:00 </option>
-                <option value="21:30">21:30 </option>
-                <option value="22:00">22:00 </option>
-                <option value="22:30">22:30 </option>
-                <option value="23:00">23:00 </option>
-                <option value="23:30">23:30 </option>
+              <select
+                key={index + "_endhour"}
+                id={index + "_endhour"}
+                className="endhour"
+              >
+                <option key={"00:00" + index} value="00:00">
+                  00:00
+                </option>
+                <option key={"00:30" + index} value="00:30">
+                  00:30{" "}
+                </option>
+                <option key={"1:00" + index} value="1:00">
+                  1:00{" "}
+                </option>
+                <option key={"1:30" + index} value="1:30">
+                  1:30{" "}
+                </option>
+                <option key={"2:00" + index} value="2:00">
+                  2:00{" "}
+                </option>
+                <option key={"2:30" + index} value="2:30">
+                  2:30{" "}
+                </option>
+                <option key={"3:00" + index} value="3:00">
+                  3:00{" "}
+                </option>
+                <option key={"3:30" + index} value="3:30">
+                  3:30{" "}
+                </option>
+                <option key={"4:00" + index} value="4:00">
+                  4:00{" "}
+                </option>
+                <option key={"4:30" + index} value="4:30">
+                  4:30{" "}
+                </option>
+                <option key={"5:00" + index} value="5:00">
+                  5:00{" "}
+                </option>
+                <option key={"5:30" + index} value="5:30">
+                  5:30{" "}
+                </option>
+                <option key={"6:00" + index} value="6:00">
+                  6:00{" "}
+                </option>
+                <option key={"6:30" + index} value="6:30">
+                  6:30{" "}
+                </option>
+                <option key={"7:00" + index} value="7:00">
+                  7:00{" "}
+                </option>
+                <option key={"7:30" + index} value="7:30">
+                  7:30{" "}
+                </option>
+                <option key={"8:00" + index} value="8:00">
+                  8:00{" "}
+                </option>
+                <option key={"8:30" + index} value="8:30">
+                  8:30{" "}
+                </option>
+                <option key={"9:00" + index} value="9:00">
+                  9:00{" "}
+                </option>
+                <option key={"9:30" + index} value="9:30">
+                  9:30{" "}
+                </option>
+                <option key={"10:00" + index} value="10:00">
+                  10:00{" "}
+                </option>
+                <option key={"10:30" + index} value="10:30">
+                  10:30{" "}
+                </option>
+                <option key={"11:00" + index} value="11:00">
+                  11:00{" "}
+                </option>
+                <option key={"11:30" + index} value="11:30">
+                  11:30{" "}
+                </option>
+                <option key={"12:00" + index} value="12:00">
+                  12:00{" "}
+                </option>
+                <option key={"12:30" + index} value="12:30">
+                  12:30{" "}
+                </option>
+                <option key={"13:00" + index} value="13:00">
+                  13:00{" "}
+                </option>
+                <option key={"13:30" + index} value="13:30">
+                  13:30{" "}
+                </option>
+                <option key={"14:00" + index} value="14:00">
+                  14:00{" "}
+                </option>
+                <option key={"14:30" + index} value="14:30">
+                  14:30{" "}
+                </option>
+                <option key={"15:00" + index} value="15:00">
+                  15:00{" "}
+                </option>
+                <option key={"15:30" + index} value="15:30">
+                  15:30{" "}
+                </option>
+                <option key={"16:00" + index} value="16:00">
+                  16:00{" "}
+                </option>
+                <option key={"16:30" + index} value="16:30">
+                  16:30{" "}
+                </option>
+                <option key={"17:00" + index} value="17:00">
+                  17:00{" "}
+                </option>
+                <option key={"17:30" + index} value="17:30">
+                  17:30{" "}
+                </option>
+                <option key={"18:00" + index} value="18:00">
+                  18:00{" "}
+                </option>
+                <option key={"18:30" + index} value="18:30">
+                  18:30{" "}
+                </option>
+                <option key={"19:00" + index} value="19:00">
+                  19:00{" "}
+                </option>
+                <option key={"19:30" + index} value="19:30">
+                  19:30{" "}
+                </option>
+                <option key={"20:00" + index} value="20:00">
+                  20:00{" "}
+                </option>
+                <option key={"20:30" + index} value="20:30">
+                  20:30{" "}
+                </option>
+                <option key={"21:00" + index} value="21:00">
+                  21:00{" "}
+                </option>
+                <option key={"21:30" + index} value="21:30">
+                  21:30{" "}
+                </option>
+                <option key={"22:00" + index} value="22:00">
+                  22:00{" "}
+                </option>
+                <option key={"22:30" + index} value="22:30">
+                  22:30{" "}
+                </option>
+                <option key={"23:00" + index} value="23:00">
+                  23:00{" "}
+                </option>
+                <option key={"23:30" + index} value="23:30">
+                  23:30{" "}
+                </option>
               </select>
             </div>
           </div>
@@ -284,6 +484,8 @@ function make(objToSend) {
 }
 
 const CreateNewBusiness = (props) => {
+  let businessId = window.location.pathname.split("/")[2];
+
   //states
   const history = useHistory();
   const [defultBus, setDefultBus] = useState({
@@ -307,22 +509,24 @@ const CreateNewBusiness = (props) => {
   // if we get busID from props then its update business if not its a new business
   // so if yes we have to get the bus from the server and set the data on the fields and then we can update
   // the data and save it
-  if (props.busID) {
-    api("business/" + props.busID, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        token: localStorage.getItem("access_token"),
-      },
-    })
-      .then((response) => {
-        // console.log(response);
-        setDefultBus(response); // here we get the bus from the server by his id
+  useEffect(() => {
+    if (businessId) {
+      api("business/" + businessId, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          token: localStorage.getItem("access_token"),
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+        .then((response) => {
+          console.log(response);
+          setDefultBus(response); // here we get the bus from the server by his id
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
   //functions
   const onChangeHandler = (e) => {
@@ -352,11 +556,11 @@ const CreateNewBusiness = (props) => {
     objToSend.calendar = checkAllDays();
 
     console.log(objToSend);
-    // we have to update or add a new business its depends on the props.busID
+    // we have to update or add a new business its depends on the businessId
 
-    if (props.busID) {
+    if (businessId) {
       // here we want to update
-      api("editbusinsess/" + props.busID, {
+      api("editbusinsess/" + businessId, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -419,7 +623,7 @@ const CreateNewBusiness = (props) => {
           id="shopname"
           name="shopname"
           placeholder="Shop's Name"
-          icon="img/user.svg"
+          icon="img/barber-shop.svg"
           alt="shopname"
           value={defultBus.businessname}
           onChangeFunc={onChangeHandler}
@@ -439,7 +643,7 @@ const CreateNewBusiness = (props) => {
           id="adress"
           name="adress"
           placeholder="Adress"
-          icon="img/identification.svg"
+          icon="img/location.svg"
           alt="adress"
           value={defultBus.businessaddress}
           onChangeFunc={onChangeHandler}
@@ -449,7 +653,7 @@ const CreateNewBusiness = (props) => {
           id="location"
           name="location"
           placeholder="Locate me geo"
-          icon="img/identification.svg"
+          icon="img/address.svg"
           alt="location"
           value={defultBus.businessaddress}
           onChangeFunc={onChangeHandler}
@@ -472,7 +676,17 @@ const CreateNewBusiness = (props) => {
             <option value="December">December</option>
           </select>
         </div>
+        <div className="timediffence">
+          <label htmlFor="timediff">Time diffence between appointments:</label>
 
+          <select name="timediff" id="timediff">
+            <option value="30">30 min</option>
+            <option value="15">15 min</option>
+
+            <option value="45">45 min</option>
+            <option value="60">60 min</option>
+          </select>
+        </div>
         <div id="weekinfo">
           <div className="dayinfo">
             <div>Week days:</div>
