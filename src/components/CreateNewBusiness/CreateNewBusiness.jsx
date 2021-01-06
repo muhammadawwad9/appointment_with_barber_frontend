@@ -625,7 +625,7 @@ const CreateNewBusiness = (props) => {
           id="shopname"
           name="shopname"
           placeholder="Shop's Name"
-          icon="img/barber-shop.svg"
+          icon="/img/barber-shop.svg"
           alt="shopname"
           value={defultBus.businessname}
           onChangeFunc={onChangeHandler}
@@ -635,7 +635,7 @@ const CreateNewBusiness = (props) => {
           id="phonenumber"
           name="phonenumber"
           placeholder="Phone Number"
-          icon="img/phone-call.svg"
+          icon="/img/phone-call.svg"
           alt="phonenumber"
           value={defultBus.phone}
           onChangeFunc={onChangeHandler}
@@ -645,7 +645,7 @@ const CreateNewBusiness = (props) => {
           id="adress"
           name="adress"
           placeholder="Adress"
-          icon="img/location.svg"
+          icon="/img/location.svg"
           alt="adress"
           value={defultBus.businessaddress}
           onChangeFunc={onChangeHandler}
@@ -655,7 +655,7 @@ const CreateNewBusiness = (props) => {
           id="location"
           name="location"
           placeholder="Locate me geo"
-          icon="img/address.svg"
+          icon="/img/address.svg"
           alt="location"
           value={defultBus.businessaddress}
           onChangeFunc={onChangeHandler}
