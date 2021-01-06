@@ -123,8 +123,9 @@
 .delete-icon {
   position: absolute;
   left: 85%;
-  transform: translateX(-2px);
-  top: 10px;
+  top: 50%;
+  transform: translate(-2px, -50%);
+
   width: 23px;
   height: 23px;
 }

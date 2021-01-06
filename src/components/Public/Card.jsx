@@ -201,7 +201,7 @@ const Card = ({
           alt="delete"
           onClick={deleteAppointment}
         />
-        <img className="edit-icon" src="img/edit.svg" alt="edit" />
+        {/* <img className="edit-icon" src="img/edit.svg" alt="edit" /> */}
         <div className="edge"></div>
       </div>
     );

@@ -18,7 +18,7 @@ const BusinessPage = ({ user, setUser }) => {
   const [days, setDays] = useState([]);
   const [msg, setMsg] = useState(null);
 
-  console.log("selectVAAAAAAAAAAAAAAL: ", selectVal);
+  // console.log("selectVAAAAAAAAAAAAAAL: ", selectVal);
   //functions
   const favToggle = (e) => {
     if (e.target.classList.contains("empty")) {
@@ -90,7 +90,7 @@ const BusinessPage = ({ user, setUser }) => {
           if (calendar.msg) {
             setMsg(calendar.msg);
           } else {
-            console.log("HERE IS THE CALENDAR: ", calendar);
+            // console.log("HERE IS THE CALENDAR: ", calendar);
             const daynumsArr = calendar.map((day) => {
               return {
                 daynum: day.daynum,

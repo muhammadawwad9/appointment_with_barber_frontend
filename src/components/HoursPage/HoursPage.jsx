@@ -15,11 +15,13 @@ const HoursPage = () => {
   const month = window.location.pathname.split("/")[3];
   const businessId = window.location.pathname.split("/")[4];
   const calendarName = month + "_" + businessId;
+  const calendarNameToSend = month + "/" + businessId;
+
   // console.log("dayNum: ", dayNum);
   // console.log("month: ", month);
   // console.log("business id: ", businessId);
   // console.log("calendar name: ", calendarName);
-  console.log("STATESTATE: ", emptyHoursArr);
+  // console.log("STATESTATE: ", emptyHoursArr);
   //functions
   //this function returns the sum of an hour plus minutes
   const addMinutesToHour = (hour, minutes) => {
@@ -48,7 +50,7 @@ const HoursPage = () => {
       headers: { token: localStorage.getItem("access_token") },
     })
       .then((calendar) => {
-        console.log("THE CALENDAR IS: ", calendar);
+        // console.log("THE CALENDAR IS: ", calendar);
         const wantedDay = calendar.filter((day) => day.daynum == dayNum)[0];
         const workingHours = JSON.parse(wantedDay.workinghours);
         const appointments = JSON.parse(wantedDay.appointments);
@@ -62,9 +64,9 @@ const HoursPage = () => {
               Date.parse(`01/01/2011 ${start}`) <
               Date.parse(`01/01/2011 ${workingHours[i].end}`)
             ) {
-              console.log("empty hours array(before): ", emptyHoursArr);
+              // console.log("empty hours array(before): ", emptyHoursArr);
               emptyHoursArr.push(start);
-              console.log("empty hours array(after): ", emptyHoursArr);
+              // console.log("empty hours array(after): ", emptyHoursArr);
 
               start = addMinutesToHour(start, diff);
             }
@@ -85,14 +87,14 @@ const HoursPage = () => {
                   Date.parse(`01/01/2011 ${appointments[i].hour}`) ==
                   Date.parse(`01/01/2011 ${start}`)
                 ) {
-                  console.log("taken, and the hour is: ", appointments[i]);
+                  // console.log("taken, and the hour is: ", appointments[i]);
                   // console.log(i);
                   ok = false;
                 }
                 if (ok) {
-                  console.log("2 empty hours array(before): ", emptyHoursArr);
+                  // console.log("2 empty hours array(before): ", emptyHoursArr);
                   emptyHoursArr.push(start);
-                  console.log("2 empty hours array(after): ", emptyHoursArr);
+                  // console.log("2 empty hours array(after): ", emptyHoursArr);
                 }
                 ok = true;
               }
@@ -113,7 +115,14 @@ const HoursPage = () => {
       </h1>
       <div className="hours">
         {emptyHoursArr.map((hour, i) => {
-          return <HourBox key={hour} hour={hour} />;
+          return (
+            <HourBox
+              key={hour}
+              hour={hour}
+              calendarName={calendarNameToSend}
+              businessId={businessId}
+            />
+          );
         })}
       </div>
     </div>

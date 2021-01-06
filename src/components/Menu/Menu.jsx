@@ -25,7 +25,7 @@ const Menu = (props) => {
       <div className="topmenusection">
         {" "}
         <img
-          src="img/menu.svg"
+          src="/img/menu.svg"
           className="menubaricon"
           onClick={props.menuClick}
         ></img>
