@@ -328,17 +328,17 @@ const CreateNewBusiness = (props) => {
   const onChangeHandler = (e) => {
     const val = e.target.value;
     switch (e.target.id) {
-      case "email":
-        setObjToSend({ ...objToSend, email: val });
+      case "shopname":
+        setObjToSend({ ...objToSend, businessname: val });
         break;
       case "phonenumber":
         setObjToSend({ ...objToSend, phone: val });
         break;
-      case "firstname":
-        setObjToSend({ ...objToSend, firstname: val });
+      case "adress":
+        setObjToSend({ ...objToSend, businessaddress: val });
         break;
-      case "lastname":
-        setObjToSend({ ...objToSend, lastname: val });
+      case "location":
+        setObjToSend({ ...objToSend, geolocation: val });
         break;
     }
   };
@@ -436,9 +436,19 @@ const CreateNewBusiness = (props) => {
         />
         <Inputs
           type="text"
+          id="adress"
+          name="adress"
+          placeholder="Adress"
+          icon="img/identification.svg"
+          alt="adress"
+          value={defultBus.businessaddress}
+          onChangeFunc={onChangeHandler}
+        />
+        <Inputs
+          type="text"
           id="location"
           name="location"
-          placeholder="Locate me"
+          placeholder="Locate me geo"
           icon="img/identification.svg"
           alt="location"
           value={defultBus.businessaddress}
