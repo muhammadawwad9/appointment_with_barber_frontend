@@ -6,6 +6,7 @@ import api from "../api/api";
 //components imports
 import Card from "../Public/Card";
 import Title from "../Public/Title";
+import { NavLink } from "react-router-dom";
 const BusinessPage = ({ user, setUser }) => {
   let businessId = window.location.pathname.split("/")[2];
   //businesspage/:id
@@ -71,7 +72,7 @@ const BusinessPage = ({ user, setUser }) => {
       .catch((err) => console.error(err));
   }, []);
 
-  console.log("BUSINESS STAAATE: ", business);
+  // console.log("BUSINESS STAAATE: ", business);
   {
     return business == null ? (
       <img
@@ -80,6 +81,11 @@ const BusinessPage = ({ user, setUser }) => {
       />
     ) : (
       <div className="BusinessPage">
+        <NavLink exact to="/hourspage/1/august/2">
+          <h3 className="just-for-testing">
+            go to HoursPage component (testing)
+          </h3>
+        </NavLink>
         <Title title={business.businessObj.businessname} />
         {user.myFavorites.indexOf(String(businessId)) == -1 ? (
           <img

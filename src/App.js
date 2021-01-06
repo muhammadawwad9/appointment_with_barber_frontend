@@ -25,6 +25,7 @@ import EditProfile from "./components/EditProfile/profile";
 import MyFavorites from "./components/MyFavorites/MyFavorites";
 import BusinessPage from "./components/BusinessPage/BusinessPage";
 import CreateNewBusiness from "./components/CreateNewBusiness/CreateNewBusiness";
+import HoursPage from "./components/HoursPage/HoursPage";
 toast.configure();
 
 function App() {
@@ -116,6 +117,14 @@ function App() {
           <Route exact path="/businesspage/:id">
             {isLoggedIn ? (
               <BusinessPage user={user} setUser={setUser} />
+            ) : (
+              <Redirect exact to="/login" />
+            )}
+          </Route>
+
+          <Route exact path="/hourspage/:daynum/:month/:businessid">
+            {isLoggedIn ? (
+              <HoursPage user={user} setUser={setUser} />
             ) : (
               <Redirect exact to="/login" />
             )}

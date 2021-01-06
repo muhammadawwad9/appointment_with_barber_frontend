@@ -1,0 +1,11 @@
+.HoursPage .date {
+  text-align: center;
+  margin: 20px 0px;
+}
+
+.hours {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  padding: 0px 50px;
+}

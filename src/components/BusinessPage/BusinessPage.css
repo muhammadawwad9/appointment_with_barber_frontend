@@ -28,3 +28,11 @@
   left: 50%;
   top: 20px;
 }
+
+.just-for-testing {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 250px;
+  text-align: center;
+}
