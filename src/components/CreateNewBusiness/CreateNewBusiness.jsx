@@ -112,12 +112,12 @@ function checkAllDays() {
 
   let allDays = [];
   let someThingWrong = false;
+
   const monthname = document.getElementById("month").value;
   const calendar = {
     month: monthname,
     days: "",
   };
-  console.log(monthname);
   nameDays.map((elemnt, index) => {
     let isworking = false;
     const startHourElement = document.getElementById(index + "_starthour");
@@ -159,7 +159,12 @@ function daysInMonth(month, year) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-function make() {
+function make(objToSend) {
+  const monthelement = document.getElementById("month");
+  if (objToSend.calendar.month) monthelement.value = objToSend.calendar.month;
+
+  //   const daysWithNames = getTheDaysWithNamesFromCalendar(objToSend.calendar.days,objToSend.calendar.month);
+
   return (
     <div>
       {nameDays.map((elemnt, index) => {
@@ -303,7 +308,7 @@ const CreateNewBusiness = (props) => {
   // so if yes we have to get the bus from the server and set the data on the fields and then we can update
   // the data and save it
   if (props.busID) {
-    api("updateUser/", {
+    api("business/" + props.busID, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -315,7 +320,7 @@ const CreateNewBusiness = (props) => {
         setDefultBus(response); // here we get the bus from the server by his id
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   }
 
@@ -343,7 +348,7 @@ const CreateNewBusiness = (props) => {
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad
     e.preventDefault();
-    checkAllDays();
+
     objToSend.calendar = checkAllDays();
 
     console.log(objToSend);
@@ -351,37 +356,58 @@ const CreateNewBusiness = (props) => {
 
     if (props.busID) {
       // here we want to update
+      api("editbusinsess/" + props.busID, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          token: localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(objToSend),
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.ownerid) {
+            toast.success("Successfully Updated ", {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          } else {
+            toast.error(response, {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          }
+        })
+        .catch((err) => {
+          // console.log("Im in catch");
+          console.error(err);
+        });
     } else {
       // here we want to create new
-    }
 
-    api("updateUser/", {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        token: localStorage.getItem("access_token"),
-      },
-      body: JSON.stringify(objToSend),
-    })
-      .then((response) => {
-        // console.log(response);
-        if (response.userObj) {
-          localStorage.setItem("userObj", JSON.stringify(response.userObj));
-          userObj = JSON.parse(localStorage.getItem("userObj"));
-
-          toast.success("Successfully Updated ", {
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-        } else {
-          toast.error(response, {
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-        }
+      api("newbusiness/", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          token: localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(objToSend),
       })
-      .catch((err) => {
-        // console.log("Im in catch");
-        console.error(err);
-      });
+        .then((response) => {
+          // console.log(response);
+          if (response.ownerid) {
+            toast.success("Successfully Added ", {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          } else {
+            toast.error(response, {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          }
+        })
+        .catch((err) => {
+          // console.log("Im in catch");
+          console.error(err);
+        });
+    }
   };
 
   return (
@@ -443,7 +469,7 @@ const CreateNewBusiness = (props) => {
             <div>Start hour:</div>
             <div>End hour:</div>
           </div>
-          {make()}
+          {make(objToSend)}
         </div>
         <Buttons className="button" text="Save" />
       </form>
