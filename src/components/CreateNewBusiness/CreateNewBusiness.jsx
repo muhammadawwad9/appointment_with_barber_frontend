@@ -498,7 +498,7 @@ const CreateNewBusiness = (props) => {
     geolocation: "",
     calendar: "",
   });
-
+  console.log(defultBus);
   const [objToSend, setObjToSend] = useState({
     businessname: defultBus.businessname,
     ownerid: defultBus.ownerid,
@@ -522,7 +522,8 @@ const CreateNewBusiness = (props) => {
       })
         .then((response) => {
           console.log(response);
-          setDefultBus(response); // here we get the bus from the server by his id
+          setDefultBus(response.businessObj);
+          // here we get the bus from the server by his id
         })
         .catch((err) => {
           console.log(err);
@@ -565,7 +566,7 @@ const CreateNewBusiness = (props) => {
       api("editbusinsess/" + businessId, {
         method: "PUT",
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
           token: localStorage.getItem("access_token"),
         },
         body: JSON.stringify(objToSend),
