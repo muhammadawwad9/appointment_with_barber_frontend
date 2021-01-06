@@ -23,14 +23,64 @@ function setDayWorkingHours(
   allDays
 ) {
   // numofday is the day in database
-  var d = new Date(year, month, 0);
+
+  let monthnum = 0;
+  switch (month) {
+    case "January":
+      monthnum = 0;
+      break;
+
+    case "February":
+      monthnum = 1;
+      break;
+    case "March":
+      monthnum = 2;
+      break;
+    case "April":
+      monthnum = 3;
+      break;
+    case "May":
+      monthnum = 4;
+      break;
+    case "June":
+      monthnum = 5;
+      break;
+    case "July":
+      monthnum = 6;
+      break;
+    case "August":
+      monthnum = 7;
+      break;
+    case "September":
+      monthnum = 8;
+      break;
+    case "October":
+      monthnum = 9;
+      break;
+    case "November":
+      monthnum = 10;
+      break;
+    case "December":
+      monthnum = 11;
+      break;
+  }
+  console.log(monthnum);
+  var d = new Date();
+  d.setFullYear(year, monthnum, 1);
+
+  //   var d = new Date(year, monthnum, 0);
+  console.log(d.getMonth());
+  console.log(d.getFullYear());
 
   var numOfDays = daysInMonth(d.getMonth(), d.getFullYear()); //Get total days in a month
+  console.log(numOfDays);
 
   for (var i = 1; i <= numOfDays; i++) {
     //looping through days in month
     var newDate = new Date(d.getFullYear(), d.getMonth(), i);
-    if (newDate.getDay() == nameOfDay) {
+    const nameInWeek = nameDays[newDate.getDay()];
+
+    if (nameInWeek == nameOfDay) {
       //if Sunday
       // here we can set the working hours for the day example all sundays days
       // we can make object for this day
@@ -48,30 +98,81 @@ function setDayWorkingHours(
   // here we can return for all days that nameofday the same object working hours
   // thats include the working hours for all sundays for example
 }
+let nameDays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+function checkAllDays() {
+  // going over all days to get the ids with start and end hours
 
-function checkAllDays() {}
+  let allDays = [];
+  let someThingWrong = false;
+
+  const monthname = document.getElementById("month").value;
+  const calendar = {
+    month: monthname,
+    days: "",
+  };
+  nameDays.map((elemnt, index) => {
+    let isworking = false;
+    const startHourElement = document.getElementById(index + "_starthour");
+    const endHourElement = document.getElementById(index + "_endhour");
+    const endHour = endHourElement.value;
+    const startHour = startHourElement.value;
+    if (
+      Date.parse("01/01/2011 " + endHour) >
+      Date.parse("01/01/2011 " + startHour)
+    ) {
+      isworking = true;
+    } else {
+      isworking = false;
+    }
+    const hoursobj = {
+      start: startHour,
+      end: endHour,
+    };
+    const wh = [];
+    wh.push(hoursobj);
+
+    allDays = setDayWorkingHours(
+      2021,
+      monthname,
+      wh,
+      "numOfDay",
+      elemnt,
+      isworking,
+      30,
+      allDays
+    );
+  });
+  console.log(allDays);
+  calendar.days = allDays;
+  return calendar;
+}
 
 function daysInMonth(month, year) {
-  return new Date(year, month, 0).getDate();
+  return new Date(year, month + 1, 0).getDate();
 }
-function make() {
-  let nameDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+
+function make(objToSend) {
+  const monthelement = document.getElementById("month");
+  if (objToSend.calendar.month) monthelement.value = objToSend.calendar.month;
+
+  //   const daysWithNames = getTheDaysWithNamesFromCalendar(objToSend.calendar.days,objToSend.calendar.month);
+
   return (
     <div>
       {nameDays.map((elemnt, index) => {
         return (
           <div id={index} className="dayinfo">
             <div className="dayname">{nameDays[index]}</div>
-            <div id={index + "_starthour"} className="starthour">
-              <select className="starthour">
+            <div className="starthour">
+              <select id={index + "_starthour"} className="starthour">
                 <option value="00:00">00:00 </option>
                 <option value="00:30">00:30 </option>
                 <option value="1:00">1:00 </option>
@@ -123,8 +224,8 @@ function make() {
               </select>
             </div>
 
-            <div id={index + "_endhour"} className="endhour">
-              <select className="endhour">
+            <div className="endhour">
+              <select id={index + "_endhour"} className="endhour">
                 <option value="00:00">00:00 </option>
                 <option value="00:30">00:30 </option>
                 <option value="1:00">1:00 </option>
@@ -207,7 +308,7 @@ const CreateNewBusiness = (props) => {
   // so if yes we have to get the bus from the server and set the data on the fields and then we can update
   // the data and save it
   if (props.busID) {
-    api("updateUser/", {
+    api("business/" + props.busID, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -219,7 +320,7 @@ const CreateNewBusiness = (props) => {
         setDefultBus(response); // here we get the bus from the server by his id
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   }
 
@@ -227,17 +328,17 @@ const CreateNewBusiness = (props) => {
   const onChangeHandler = (e) => {
     const val = e.target.value;
     switch (e.target.id) {
-      case "email":
-        setObjToSend({ ...objToSend, email: val });
+      case "shopname":
+        setObjToSend({ ...objToSend, businessname: val });
         break;
       case "phonenumber":
         setObjToSend({ ...objToSend, phone: val });
         break;
-      case "firstname":
-        setObjToSend({ ...objToSend, firstname: val });
+      case "adress":
+        setObjToSend({ ...objToSend, businessaddress: val });
         break;
-      case "lastname":
-        setObjToSend({ ...objToSend, lastname: val });
+      case "location":
+        setObjToSend({ ...objToSend, geolocation: val });
         break;
     }
   };
@@ -248,41 +349,65 @@ const CreateNewBusiness = (props) => {
     //missing validation in this function I will do it later- Awwad
     e.preventDefault();
 
+    objToSend.calendar = checkAllDays();
+
+    console.log(objToSend);
     // we have to update or add a new business its depends on the props.busID
 
     if (props.busID) {
       // here we want to update
+      api("editbusinsess/" + props.busID, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          token: localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(objToSend),
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.ownerid) {
+            toast.success("Successfully Updated ", {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          } else {
+            toast.error(response, {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          }
+        })
+        .catch((err) => {
+          // console.log("Im in catch");
+          console.error(err);
+        });
     } else {
       // here we want to create new
-    }
 
-    api("updateUser/", {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        token: localStorage.getItem("access_token"),
-      },
-      body: JSON.stringify(objToSend),
-    })
-      .then((response) => {
-        // console.log(response);
-        if (response.userObj) {
-          localStorage.setItem("userObj", JSON.stringify(response.userObj));
-          userObj = JSON.parse(localStorage.getItem("userObj"));
-
-          toast.success("Successfully Updated ", {
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-        } else {
-          toast.error(response, {
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-        }
+      api("newbusiness/", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          token: localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(objToSend),
       })
-      .catch((err) => {
-        // console.log("Im in catch");
-        console.error(err);
-      });
+        .then((response) => {
+          // console.log(response);
+          if (response.ownerid) {
+            toast.success("Successfully Added ", {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          } else {
+            toast.error(response, {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          }
+        })
+        .catch((err) => {
+          // console.log("Im in catch");
+          console.error(err);
+        });
+    }
   };
 
   return (
@@ -311,9 +436,19 @@ const CreateNewBusiness = (props) => {
         />
         <Inputs
           type="text"
+          id="adress"
+          name="adress"
+          placeholder="Adress"
+          icon="img/identification.svg"
+          alt="adress"
+          value={defultBus.businessaddress}
+          onChangeFunc={onChangeHandler}
+        />
+        <Inputs
+          type="text"
           id="location"
           name="location"
-          placeholder="Locate me"
+          placeholder="Locate me geo"
           icon="img/identification.svg"
           alt="location"
           value={defultBus.businessaddress}
@@ -344,7 +479,7 @@ const CreateNewBusiness = (props) => {
             <div>Start hour:</div>
             <div>End hour:</div>
           </div>
-          {make()}
+          {make(objToSend)}
         </div>
         <Buttons className="button" text="Save" />
       </form>
