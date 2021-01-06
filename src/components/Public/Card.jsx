@@ -113,7 +113,7 @@ const Card = ({
         <img className="location-icon" src="img/location.svg" />
         <h3 className="location">{location}</h3>
         <h3 className="avg">{avg}/5</h3>
-        {user.myFavorites.indexOf(String(id)) == -1 ? (
+        {user.myFavorites && user.myFavorites.indexOf(String(id)) == -1 ? (
           <img
             className="favorite-icon empty"
             src="img/emptystar.svg"
