@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./BusinessPage.css";
+import "./BusAppointments.css";
 import { NavLink } from "react-router-dom";
 //functions imports
 import api from "../api/api";
@@ -7,9 +7,9 @@ import api from "../api/api";
 //components imports
 import Card from "../Public/Card";
 import Title from "../Public/Title";
-import DayBox from "../Public/DayBox";
+import DayBoxBus from "../Public/DayBoxBus";
 
-const BusinessPage = ({ user, setUser }) => {
+const BusAppointments = () => {
   let businessId = window.location.pathname.split("/")[2];
   //businesspage/:id
   //states
@@ -37,51 +37,6 @@ const BusinessPage = ({ user, setUser }) => {
 
   // console.log("selectVAAAAAAAAAAAAAAL: ", selectVal);
   //functions
-  const favToggle = (e) => {
-    if (e.target.classList.contains("empty")) {
-      e.target.src = "/img/filledstar.svg";
-      e.target.classList.remove("empty");
-      api("favorites", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          token: localStorage.getItem("access_token"),
-        },
-        body: JSON.stringify({
-          businessId: String(businessId),
-        }),
-      })
-        .then((favorites) => {
-          // console.log("PARSED RESPONSEEEE AFTER Add: ", favorites);
-          let userObj = JSON.parse(localStorage.getItem("userObj"));
-          userObj.myFavorites = favorites.myfavorites;
-          localStorage.setItem("userObj", JSON.stringify(userObj));
-          setUser(userObj);
-        })
-        .catch((err) => console.error(err));
-    } else {
-      e.target.src = "/img/emptystar.svg";
-      e.target.classList.add("empty");
-      api("favorites", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          token: localStorage.getItem("access_token"),
-        },
-        body: JSON.stringify({
-          businessId: String(businessId),
-        }),
-      })
-        .then((favorites) => {
-          // console.log("PARSED RESPONSEEEE AFTER DELETE: ", favorites);
-          let userObj = JSON.parse(localStorage.getItem("userObj"));
-          userObj.myFavorites = favorites.myfavorites;
-          localStorage.setItem("userObj", JSON.stringify(userObj));
-          setUser(userObj);
-        })
-        .catch((err) => console.error(err));
-    }
-  };
 
   const changeHandler = (e) => {
     setSelectVal(e.target.value);
@@ -140,34 +95,7 @@ const BusinessPage = ({ user, setUser }) => {
     ) : (
       <div className="BusinessPage">
         <Title title={business.businessObj.businessname} />
-        <div>
-          {user.myFavorites.indexOf(String(businessId)) == -1 ? (
-            <img
-              className="favorite-icon empty"
-              src="/img/emptystar.svg"
-              alt=""
-              onClick={favToggle}
-            />
-          ) : (
-            <img
-              className="favorite-icon "
-              src="/img/filledstar.svg"
-              alt=""
-              onClick={favToggle}
-            />
-          )}
-          <Card
-            id={business.businessObj.id}
-            bsCard={true}
-            businessName={business.businessObj.businessname}
-            ownerFirstName={business.firstname}
-            ownerLastName={business.lastname}
-            geolocation={business.businessObj.geolocation}
-            businessAddress={business.businessObj.businessaddress}
-            phone={business.phone}
-            setUser={setUser}
-          />
-        </div>
+
         <select onChange={changeHandler}>
           <option vale="">--Month--</option>
           <option value="January">January</option>
@@ -200,7 +128,7 @@ const BusinessPage = ({ user, setUser }) => {
             </div>
             {days.map((day, i) => {
               return (
-                <DayBox
+                <DayBoxBus
                   key={i}
                   businessId={businessId}
                   month={selectVal}
@@ -216,4 +144,4 @@ const BusinessPage = ({ user, setUser }) => {
   }
 };
 
-export default BusinessPage;
+export default BusAppointments;

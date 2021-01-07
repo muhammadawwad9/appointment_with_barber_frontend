@@ -27,6 +27,8 @@ import BusinessPage from "./components/BusinessPage/BusinessPage";
 import CreateNewBusiness from "./components/CreateNewBusiness/CreateNewBusiness";
 import MyBusinesses from "./components/MyBusinesses/MyBusinesses";
 import HoursPage from "./components/HoursPage/HoursPage";
+import BusAppointments from "./components/BusAppointments/BusAppointments";
+import HoursPageBus from "./components/HoursPageBus/HoursPageBus";
 toast.configure();
 
 function App() {
@@ -140,6 +142,15 @@ function App() {
               <Redirect exact to="/login" />
             )}
           </Route>
+
+          <Route exact path="/busappointments/:id">
+            {isLoggedIn ? <BusAppointments /> : <Redirect exact to="/login" />}
+          </Route>
+
+          <Route exact path="/hourspagebus/:daynum/:month/:businessid">
+            {isLoggedIn ? <HoursPageBus /> : <Redirect exact to="/login" />}
+          </Route>
+
           <Route render={() => <Redirect to="/login" />} />
           <Title title="LOG IN" />
           <Inputs
