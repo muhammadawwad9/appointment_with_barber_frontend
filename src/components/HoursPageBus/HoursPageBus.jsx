@@ -61,54 +61,12 @@ const HoursPageBus = () => {
         const appointments = JSON.parse(wantedDay.appointments);
         const diff = wantedDay.diff;
         // const diff = 30;
-        const emptyHoursArr = [];
+        let appointmentsArr = [];
         if (!appointments) {
-          for (let i = 0; i < workingHours.length; i++) {
-            let start = workingHours[i].start;
-            while (
-              Date.parse(`01/01/2011 ${start}`) <
-              Date.parse(`01/01/2011 ${workingHours[i].end}`)
-            ) {
-              console.log("empty hours array(before): ", emptyHoursArr);
-              emptyHoursArr.push(start);
-              console.log("empty hours array(after): ", emptyHoursArr);
-
-              start = addMinutesToHour(start, diff);
-            }
-          }
         } else {
-          for (let i = 0; i < workingHours.length; i++) {
-            let start = workingHours[i].start;
-            // console.log(i, start);
-            let ok = true;
-            while (
-              Date.parse(`01/01/2011 ${start}`) <
-              Date.parse(`01/01/2011 ${workingHours[i].end}`)
-            ) {
-              for (let i = 0; i < appointments.length; i++) {
-                // console.log(i, start, appointments[i].hour);
-
-                if (
-                  Date.parse(`01/01/2011 ${appointments[i].hour}`) ==
-                  Date.parse(`01/01/2011 ${start}`)
-                ) {
-                  // console.log("taken, and the hour is: ", appointments[i]);
-                  // console.log(i);
-                  ok = false;
-                }
-              }
-              if (ok) {
-                console.log("OKKKKK");
-                console.log("2 empty hours array(before): ", emptyHoursArr);
-                emptyHoursArr.push(start);
-                console.log("2 empty hours array(after): ", emptyHoursArr);
-              }
-              ok = true;
-              start = addMinutesToHour(start, diff);
-            }
-          }
+          appointmentsArr = JSON.parse(appointments);
         }
-        setEmptyHoursArr(emptyHoursArr);
+        setEmptyHoursArr(appointmentsArr);
       })
       .catch((err) => console.error(err));
   }, [changes]);
@@ -125,15 +83,7 @@ const HoursPageBus = () => {
       </h1>
       <div className="hours">
         {emptyHoursArr.map((hour, i) => {
-          return (
-            <HourBox
-              setChanges={setChanges}
-              key={uuid()}
-              hour={hour}
-              calendarName={calendarNameToSend}
-              businessId={businessId}
-            />
-          );
+          return <div>{hour}</div>;
         })}
       </div>
     </div>
