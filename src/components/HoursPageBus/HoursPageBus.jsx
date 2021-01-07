@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import uuid from "react-uuid";
-import "./HoursPage.css";
+import "./HoursPageBus.css";
 //functions imports
 import api from "../api/api";
 
 //components imports
 import HourBox from "../Public/HourBox";
-
+import Client from "../Client/Client";
 //we will get something like this in the page address: http://localhost:4000/hourspage/:daynum/:month/
 
 const HoursPageBus = () => {
   //states
-  const [changes, setChanges] = useState(1);
   const [emptyHoursArr, setEmptyHoursArr] = useState([]);
   const dayNum = window.location.pathname.split("/")[2];
   const month = window.location.pathname.split("/")[3];
@@ -28,26 +27,6 @@ const HoursPageBus = () => {
   // console.log("calendar name: ", calendarName);
   // console.log("STATESTATE: ", emptyHoursArr);
   //functions
-  //this function returns the sum of an hour plus minutes
-  const addMinutesToHour = (hour, minutes) => {
-    let minutesInHour = hour.split(":")[1];
-    let onlyHour = hour.split(":")[0];
-    //converting the given minutes to hours
-    let minutesToHours = parseInt(minutes / 60);
-    let remainingMinutes = minutes % 60 > 0 ? minutes % 60 : minutes;
-    let finalTime;
-    if (minutesToHours >= 1) onlyHour = parseInt(onlyHour) + minutesToHours;
-
-    const minutesSum = parseInt(minutesInHour) + remainingMinutes;
-    if (minutesSum >= 60) {
-      onlyHour++;
-      let finalMinutes = minutesSum - 60;
-      finalTime = onlyHour + ":" + String(finalMinutes).padStart(2, "0");
-    } else {
-      finalTime = onlyHour + ":" + String(minutesSum).padStart(2, "0");
-    }
-    return finalTime;
-  };
 
   //useEffect (to get the calendar for that business in the given month)
   useEffect(() => {
@@ -59,33 +38,38 @@ const HoursPageBus = () => {
         const wantedDay = calendar.filter((day) => day.daynum == dayNum)[0];
         const workingHours = JSON.parse(wantedDay.workinghours);
         const appointments = JSON.parse(wantedDay.appointments);
-        const diff = wantedDay.diff;
-        // const diff = 30;
+        console.log("APPOINTMENTS AREEEEEEE: ", appointments);
         let appointmentsArr = [];
-        if (!appointments) {
+        if (appointments) {
+          console.log("firs ifff: ", appointments);
+          setEmptyHoursArr(appointments);
         } else {
-          appointmentsArr = JSON.parse(appointments);
+          setEmptyHoursArr([]);
         }
-        setEmptyHoursArr(appointmentsArr);
       })
       .catch((err) => console.error(err));
-  }, [changes]);
+  }, []);
 
   console.log("empty hours array: ", emptyHoursArr);
 
-  return emptyHoursArr.length == 0 ? (
-    <HourBox full={true} />
-  ) : (
-    <div className="HoursPage">
+  return (
+    <div>
       <h1 className="date">
         {dayNum}, {month[0].toUpperCase()}
         {month.slice(1)}
       </h1>
-      <div className="hours">
-        {emptyHoursArr.map((hour, i) => {
-          return <div>{hour}</div>;
-        })}
-      </div>
+      {!emptyHoursArr || emptyHoursArr.length == 0 ? (
+        <h2 className="message">No Appointments</h2>
+      ) : (
+        <div className="cards">
+          {emptyHoursArr.map((appointment, i) => {
+            console.log("appointmenttttttttttt: ", appointment);
+            return (
+              <Client key={i} hour={appointment.hour} id={appointment.userid} />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
