@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import "./Card.css";
+import "./MybusinessCard.css";
 //functions imports
 import api from "../api/api";
 const MyBusinessCard = ({
@@ -34,14 +34,15 @@ const MyBusinessCard = ({
             alt=""
           />
         </NavLink>
-        <NavLink exact to={`editAddBusiness/${id}`}>
-          <h3 className="business-name">{businessName}</h3>
-        </NavLink>
+        <div className="section">
+          <NavLink exact to={`editAddBusiness/${id}`}>
+            <h3 className="business-name">{businessName}</h3>
+          </NavLink>
 
-        <NavLink exact to={`busappointments/${id}`}>
-          <h3 className="business-name">Appointments</h3>
-        </NavLink>
-
+          <NavLink exact to={`busappointments/${id}`}>
+            <img className="calendar-icon" src="/img/calendar.svg" alt=""></img>
+          </NavLink>
+        </div>
         <img className="location-icon" src="img/location.svg" />
         <h3 className="location">{location}</h3>
         <h3 className="avg">{avg}/5</h3>
