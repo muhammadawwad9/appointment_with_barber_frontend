@@ -30,8 +30,6 @@ const EditProfile = ({ userObj }) => {
     setHidePass(!hidePass);
   };
 
-  const localServer = `http://localhost:4000/`;
-
   //functions
   const onChangeHandler = (e) => {
     const val = e.target.value;

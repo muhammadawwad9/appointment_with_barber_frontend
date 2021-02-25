@@ -23,8 +23,6 @@ const Signup = () => {
     isBusinessOwner: false,
   });
 
-  const localServer = `http://localhost:4000/`;
-
   //functions
   const onChangeHandler = (e) => {
     const val = e.target.value;

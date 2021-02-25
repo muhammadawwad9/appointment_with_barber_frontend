@@ -2,7 +2,9 @@ import React from "react";
 
 const api = (url, options) => {
   const server = `http://localhost:4000/`;
-  return fetch(`${server}${url}`, {
+  const heroku = "https://barber-appointment-backend.herokuapp.com/";
+
+  return fetch(`${heroku}${url}`, {
     ...options,
   })
     .then((response) => {
