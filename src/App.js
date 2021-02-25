@@ -35,7 +35,7 @@ function App() {
   const [state, setState] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-
+  console.log("USERUSERUSER: ", user);
   // console.log("IS LOGGED IN : ", isLoggedIn);
   // console.log("user in app component is: ", user);
   const menuClick = () => {
@@ -44,7 +44,7 @@ function App() {
     // console.log(state);
   };
 
-  // console.log("isLoggedInnnnnnnnnnnn:  ", isLoggedIn);
+  // console.log("isLoggedInnnnnnnnnnnn: ", isLoggedIn);
 
   //useEffect, checking the local storage to see if the user is logged in
   useEffect(() => {
@@ -104,7 +104,11 @@ function App() {
             <Signup />
           </Route>
           <Route exact path="/editprofile">
-            {isLoggedIn ? <EditProfile /> : <Redirect exact to="/login" />}
+            {isLoggedIn ? (
+              <EditProfile userObj={user} />
+            ) : (
+              <Redirect exact to="/login" />
+            )}
           </Route>
           <Route exact path="/mybusinesses">
             {isLoggedIn ? (

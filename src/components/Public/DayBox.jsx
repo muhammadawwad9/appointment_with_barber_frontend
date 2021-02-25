@@ -9,12 +9,22 @@ const DayBox = ({ isworking, daynum, businessId, month }) => {
   //   };
   console.log("month is: ", month);
   return isworking ? (
-    <NavLink exact to={`/hourspage/${daynum}/${month}/${businessId}`}>
+    <NavLink
+      className="nav-link"
+      exact
+      to={`/hourspage/${daynum}/${month}/${businessId}`}
+    >
       {" "}
       <div className="DayBox blue">{daynum}</div>
     </NavLink>
   ) : (
-    <div className="DayBox red">{daynum}</div>
+    <NavLink
+      className="nav-link"
+      exact
+      to={`/hourspage/${daynum}/${month}/${businessId}`}
+    >
+      <div className="DayBox red">{daynum}</div>
+    </NavLink>
   );
 };
 

@@ -9,7 +9,7 @@ import HourBox from "../Public/HourBox";
 
 //we will get something like this in the page address: http://localhost:4000/hourspage/:daynum/:month/
 
-const HoursPage = () => {
+const HoursPage = ({ setUser }) => {
   //states
   const [changes, setChanges] = useState(1);
   const [emptyHoursArr, setEmptyHoursArr] = useState([]);
@@ -128,6 +128,7 @@ const HoursPage = () => {
           return (
             <HourBox
               setChanges={setChanges}
+              setUser={setUser}
               key={uuid()}
               hour={hour}
               calendarName={calendarNameToSend}

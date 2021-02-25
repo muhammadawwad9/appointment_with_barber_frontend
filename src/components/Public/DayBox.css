@@ -7,6 +7,10 @@
   font-size: 30px;
 }
 
+.nav-link {
+  text-decoration: none;
+}
+
 .red {
   background-color: red;
   color: #000;

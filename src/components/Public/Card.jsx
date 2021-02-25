@@ -113,7 +113,14 @@ const Card = ({
         <img className="location-icon" src="img/location.svg" />
         <h3 className="location">{location}</h3>
         <h3 className="avg">{avg}/5</h3>
-        {user.myFavorites && user.myFavorites.indexOf(String(id)) == -1 ? (
+        {user.myFavorites == null ? (
+          <img
+            className="favorite-icon empty"
+            src="img/emptystar.svg"
+            alt=""
+            onClick={favToggle}
+          />
+        ) : user.myFavorites.indexOf(String(id)) == -1 ? (
           <img
             className="favorite-icon empty"
             src="img/emptystar.svg"
@@ -132,13 +139,6 @@ const Card = ({
         <div className="edge"></div>
       </div>
     ) : bsCard ? (
-      // !user ? (
-      // <img
-      //   src="https://media2.giphy.com/media/1dH0xIDSToAtZYwf8D/giphy.gif"
-      //   className="scissors"
-      // />
-      // ) : (
-      // <h1 className="loading">Loading</h1>
       <div className="bs-card">
         <NavLink exact to={`businesspage/${id}`}>
           {" "}
@@ -162,21 +162,6 @@ const Card = ({
         <img className="location-icon" src="/img/location.svg" />
         <h3 className="phone">{phone}</h3>
         <img className="phone-icon" src="/img/phone-call.svg" />
-        {/* {user.myFavorites.indexOf(String(id)) == -1 ? (
-            <img
-              className="favorite-icon empty"
-              src="img/emptystar.svg"
-              alt=""
-              onClick={favToggle}
-            />
-          ) : (
-            <img
-              className="favorite-icon "
-              src="img/filledstar.svg"
-              alt=""
-              onClick={favToggle}
-            />
-          )} */}
       </div>
     ) : (
       // )

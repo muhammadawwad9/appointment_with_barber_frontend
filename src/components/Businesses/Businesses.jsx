@@ -33,7 +33,7 @@ const Businesses = ({ user, setUser }) => {
         type="text"
         id="search-input"
         name="search-input"
-        placeholder="Search a barber..."
+        placeholder="Search a barber shop..."
         onChangeFunc={onChangeHandler}
       />
       <h2>Barber shops available:</h2>

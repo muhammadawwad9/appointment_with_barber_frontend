@@ -9,10 +9,9 @@ import Title from "../Public/Title";
 import Buttons from "../Public/Buttons";
 import Inputs from "../Public/Inputs";
 import { logDOM } from "@testing-library/react";
-let userObj = JSON.parse(localStorage.getItem("userObj"));
 //Login component
 
-const EditProfile = () => {
+const EditProfile = ({ userObj }) => {
   //states
   const history = useHistory();
   const [objToSend, setObjToSend] = useState({
@@ -94,37 +93,37 @@ const EditProfile = () => {
       });
 
     // fetch(`${localServer}updateUser/`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     token: localStorage.getItem("access_token"),
-    //   },
-    //   body: JSON.stringify(objToSend),
+    // method: "PUT",
+    // headers: {
+    // "content-type": "application/json",
+    // token: localStorage.getItem("access_token"),
+    // },
+    // body: JSON.stringify(objToSend),
     // })
 
-    //   .then((obj) => {
-    //     console.log("objeect:  ", obj);
+    // .then((obj) => {
+    // console.log("objeect: ", obj);
 
-    //     if (obj.userObj) {
-    //       localStorage.setItem("userObj", JSON.stringify(obj.userObj));
-    //       localStorage.setItem("access_token", obj.access_token);
-    //       userObj = JSON.parse(localStorage.getItem("userObj"));
+    // if (obj.userObj) {
+    // localStorage.setItem("userObj", JSON.stringify(obj.userObj));
+    // localStorage.setItem("access_token", obj.access_token);
+    // userObj = JSON.parse(localStorage.getItem("userObj"));
 
-    //       toast.success("Successfully Updated ", {
-    //         position: toast.POSITION.BOTTOM_CENTER,
-    //       });
-    //       console.log("obj1111", obj);
-    //     } else {
-    //       console.log("obj222", obj);
-    //       toast.error(obj, {
-    //         position: toast.POSITION.BOTTOM_CENTER,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log("Im in catch");
-    //     console.error(err);
-    //   });
+    // toast.success("Successfully Updated ", {
+    // position: toast.POSITION.BOTTOM_CENTER,
+    // });
+    // console.log("obj1111", obj);
+    // } else {
+    // console.log("obj222", obj);
+    // toast.error(obj, {
+    // position: toast.POSITION.BOTTOM_CENTER,
+    // });
+    // }
+    // })
+    // .catch((err) => {
+    // console.log("Im in catch");
+    // console.error(err);
+    // });
   };
   var strongRegex = new RegExp("^(?=.{8,})");
   const onSubmitPassHandler = (e) => {
@@ -156,28 +155,28 @@ const EditProfile = () => {
         .catch((err) => console.error(err));
 
       // fetch(`${localServer}updateUserPassword/`, {
-      //   method: "PUT",
-      //   headers: {
-      //     "content-type": "application/json",
-      //     token: localStorage.getItem("access_token"),
-      //   },
-      //   body: JSON.stringify(passObj),
+      // method: "PUT",
+      // headers: {
+      // "content-type": "application/json",
+      // token: localStorage.getItem("access_token"),
+      // },
+      // body: JSON.stringify(passObj),
       // })
-      //   .then((res) =>
-      //     res.json().then((json) => {
-      //       if (json.phone) {
-      //         toast.success("Password updated Successfully", {
-      //           position: toast.POSITION.BOTTOM_CENTER,
-      //         });
-      //       } else {
-      //         toast.error(json, {
-      //           position: toast.POSITION.BOTTOM_CENTER,
-      //         });
-      //       }
-      //       console.log(json);
-      //     })
-      //   )
-      //   .catch((err) => console.log(err));
+      // .then((res) =>
+      // res.json().then((json) => {
+      // if (json.phone) {
+      // toast.success("Password updated Successfully", {
+      // position: toast.POSITION.BOTTOM_CENTER,
+      // });
+      // } else {
+      // toast.error(json, {
+      // position: toast.POSITION.BOTTOM_CENTER,
+      // });
+      // }
+      // console.log(json);
+      // })
+      // )
+      // .catch((err) => console.log(err));
     }
   };
 

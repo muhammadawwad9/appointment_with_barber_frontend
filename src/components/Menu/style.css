@@ -4,9 +4,9 @@
 }
 
 .menu {
-  position: absolute;
+  position: fixed;
   width: 248px;
-  height: 812px;
+  height: 100vh;
   left: 1px;
   top: 0px;
   z-index: 19;

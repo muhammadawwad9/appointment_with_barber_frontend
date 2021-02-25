@@ -5,7 +5,14 @@ import "./HourBox.css";
 //functions imports
 import api from "../api/api";
 
-const HourBox = ({ hour, calendarName, businessId, setChanges, full }) => {
+const HourBox = ({
+  hour,
+  calendarName,
+  businessId,
+  setChanges,
+  setUser,
+  full,
+}) => {
   console.log("FULLL: ", full);
   //functions
   const clickHandler = () => {
@@ -31,6 +38,14 @@ const HourBox = ({ hour, calendarName, businessId, setChanges, full }) => {
           position: toast.POSITION.BOTTOM_CENTER,
         });
         setChanges((prev) => !prev);
+        setUser((prev) => {
+          const newObj = {
+            ...prev,
+            myAppointments: appointments.myappointments,
+          };
+          console.log("new new: ", newObj);
+          return newObj;
+        });
       })
       .catch((err) => console.log(err));
   };
