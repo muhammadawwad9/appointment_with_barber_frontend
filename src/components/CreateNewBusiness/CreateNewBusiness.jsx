@@ -64,16 +64,10 @@ function setDayWorkingHours(
       monthnum = 11;
       break;
   }
-  console.log(monthnum);
   var d = new Date();
   d.setFullYear(year, monthnum, 1);
 
-  //   var d = new Date(year, monthnum, 0);
-  console.log(d.getMonth());
-  console.log(d.getFullYear());
-
   var numOfDays = daysInMonth(d.getMonth(), d.getFullYear()); //Get total days in a month
-  console.log(numOfDays);
   diff = document.getElementById("timediff").value;
   for (var i = 1; i <= numOfDays; i++) {
     //looping through days in month
@@ -150,7 +144,6 @@ function checkAllDays() {
       allDays
     );
   });
-  console.log(allDays);
   calendar.days = allDays;
   return calendar;
 }
@@ -498,7 +491,6 @@ const CreateNewBusiness = (props) => {
     geolocation: "",
     calendar: "",
   });
-  console.log(defultBus);
   const [objToSend, setObjToSend] = useState({
     businessname: defultBus.businessname,
     ownerid: defultBus.ownerid,
@@ -521,7 +513,6 @@ const CreateNewBusiness = (props) => {
         },
       })
         .then((response) => {
-          console.log(response);
           setDefultBus(response.businessObj);
           setObjToSend(response.businessObj);
           // here we get the bus from the server by his id
@@ -550,8 +541,6 @@ const CreateNewBusiness = (props) => {
         break;
     }
   };
-  // console.log("halaaaaa", objToSend);
-  // console.log("nuwraaasssss", userObj);
   //functions
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad
@@ -559,7 +548,6 @@ const CreateNewBusiness = (props) => {
 
     objToSend.calendar = checkAllDays();
 
-    console.log(objToSend);
     // we have to update or add a new business its depends on the businessId
 
     if (businessId) {
@@ -573,7 +561,6 @@ const CreateNewBusiness = (props) => {
         body: JSON.stringify(objToSend),
       })
         .then((response) => {
-          console.log(response);
           if (response.ownerid) {
             toast.success("Successfully Updated ", {
               position: toast.POSITION.BOTTOM_CENTER,
@@ -585,7 +572,6 @@ const CreateNewBusiness = (props) => {
           }
         })
         .catch((err) => {
-          // console.log("Im in catch");
           console.error(err);
         });
     } else {
@@ -600,7 +586,6 @@ const CreateNewBusiness = (props) => {
         body: JSON.stringify(objToSend),
       })
         .then((response) => {
-          // console.log(response);
           if (response.ownerid) {
             toast.success("Successfully Added ", {
               position: toast.POSITION.BOTTOM_CENTER,
@@ -612,7 +597,6 @@ const CreateNewBusiness = (props) => {
           }
         })
         .catch((err) => {
-          // console.log("Im in catch");
           console.error(err);
         });
     }

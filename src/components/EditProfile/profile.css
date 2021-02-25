@@ -12,3 +12,7 @@
 .buttonchangepass {
   background: #376cba !important;
 }
+
+.editProfile {
+  border: 2px solid purple;
+}

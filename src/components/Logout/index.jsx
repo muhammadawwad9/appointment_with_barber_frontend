@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 const Logout = () => {
   const history = useHistory();
   useEffect(() => {
-    // console.log('logout');
     window.localStorage.removeItem("access_token");
   }, []);
 

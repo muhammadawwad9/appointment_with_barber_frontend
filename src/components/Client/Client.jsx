@@ -8,14 +8,12 @@ const Client = ({ hour, id }) => {
   //states
   const [user, setUser] = useState({});
   //useEffect
-  console.log("iddddddddddddddDDDD: ", id);
   useEffect(() => {
     api(`user/${id}`, {
       method: "GET",
       headers: { token: localStorage.getItem("access_token") },
     })
       .then((user) => {
-        console.log("THE USER IS: ", user);
         setUser(user);
       })
       .catch((err) => console.error(err));
