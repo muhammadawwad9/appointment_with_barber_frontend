@@ -10,6 +10,6 @@ This website helps customers and businesses to make the scheduling process smoot
 - CSS
 - React
 
-<h1 align="center"><a href="https://cranky-babbage-f1c5b5.netlify.app/">TRY THE WEBSITE HERE</a></h1>
+<h2 align="center"><a href="https://cranky-babbage-f1c5b5.netlify.app/">TRY THE WEBSITE HERE</a></h2>
 
 ### To view the backend repository <a href="https://github.com/muhammadawwad9/barber-appointment-backend">click here</a>
