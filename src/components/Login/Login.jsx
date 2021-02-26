@@ -15,7 +15,6 @@ const Login = ({ setIsLoggedIn, setUser }) => {
     pass: "",
   });
 
-  // console.log(objToSend);
   //functions
   const onChangeHandler = (e) => {
     const val = e.target.value;
@@ -39,8 +38,6 @@ const Login = ({ setIsLoggedIn, setUser }) => {
       body: JSON.stringify(objToSend),
     })
       .then((obj) => {
-        // console.log("THE OBJ IS: ", obj);
-
         if (obj.access_token) {
           toast.success(
             "Welcome " +
@@ -61,7 +58,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
         }
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   };
   return (

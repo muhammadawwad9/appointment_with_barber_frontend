@@ -18,7 +18,6 @@ const MyBusinesses = () => {
       method: "GET",
     })
       .then((resbusinesses) => {
-        console.log(resbusinesses);
         setBusinesses(resbusinesses);
       })
       .catch((err) => console.error(err));

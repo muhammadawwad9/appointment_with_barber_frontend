@@ -23,8 +23,6 @@ const Signup = () => {
     isBusinessOwner: false,
   });
 
-  const localServer = `http://localhost:4000/`;
-
   //functions
   const onChangeHandler = (e) => {
     const val = e.target.value;
@@ -46,15 +44,12 @@ const Signup = () => {
         break;
       case "business":
         setObjToSend({ ...objToSend, isBusinessOwner: true });
-        // console.log("business");
         break;
       case "client":
         setObjToSend({ ...objToSend, isBusinessOwner: false });
-        // console.log("client");
         break;
     }
   };
-  // console.log(objToSend);
   //functions
   const onSubmitHandler = (e) => {
     //missing validation in this function I will do it later- Awwad
@@ -75,26 +70,6 @@ const Signup = () => {
         }
       })
       .catch((err) => console.error(err));
-
-    // fetch(`${localServer}signup`, {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(objToSend),
-    // })
-    //   .then((response) => response.json())
-    //   .then((obj) => {
-    //     console.log("objeect:  ", obj);
-    //     if (obj.message) {
-    //       history.push("/login");
-    //     } else {
-    //       toast.error(obj, {
-    //         position: toast.POSITION.BOTTOM_CENTER,
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
   };
 
   return (

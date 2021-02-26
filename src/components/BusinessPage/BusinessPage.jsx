@@ -35,7 +35,6 @@ const BusinessPage = ({ user, setUser }) => {
     13: "Sa",
   };
 
-  // console.log("selectVAAAAAAAAAAAAAAL: ", selectVal);
   //functions
   const favToggle = (e) => {
     if (e.target.classList.contains("empty")) {
@@ -52,7 +51,6 @@ const BusinessPage = ({ user, setUser }) => {
         }),
       })
         .then((favorites) => {
-          // console.log("PARSED RESPONSEEEE AFTER Add: ", favorites);
           let userObj = JSON.parse(localStorage.getItem("userObj"));
           userObj.myFavorites = favorites.myfavorites;
           localStorage.setItem("userObj", JSON.stringify(userObj));
@@ -73,7 +71,6 @@ const BusinessPage = ({ user, setUser }) => {
         }),
       })
         .then((favorites) => {
-          // console.log("PARSED RESPONSEEEE AFTER DELETE: ", favorites);
           let userObj = JSON.parse(localStorage.getItem("userObj"));
           userObj.myFavorites = favorites.myfavorites;
           localStorage.setItem("userObj", JSON.stringify(userObj));
@@ -92,7 +89,6 @@ const BusinessPage = ({ user, setUser }) => {
       headers: { token: localStorage.getItem("access_token") },
     })
       .then((business) => {
-        //   console.log("the business issssssssssssssssssss: ", business);
         setBusiness(business);
       })
       .catch((err) => console.error(err));
@@ -108,20 +104,17 @@ const BusinessPage = ({ user, setUser }) => {
           if (calendar.msg) {
             setMsg(calendar.msg);
           } else {
-            // console.log("HERE IS THE CALENDAR: ", calendar);
             const daynumsArr = calendar.map((day) => {
               return {
                 daynum: day.daynum,
                 isworking: day.isworking,
               };
             });
-            console.log(daynumsArr);
             daynumsArr.sort((a, b) => {
               if (a.daynum > b.daynum) return 1;
               else if (a.daynum == b.daynum) return 0;
               else return -1;
             });
-            console.log(daynumsArr);
             setDays(daynumsArr);
             setMsg(null);
           }
@@ -130,7 +123,6 @@ const BusinessPage = ({ user, setUser }) => {
     }
   }, [selectVal]);
 
-  // console.log("BUSINESS STAAATE: ", business);
   {
     return business == null ? (
       <img
@@ -185,20 +177,14 @@ const BusinessPage = ({ user, setUser }) => {
           <option value="December">December</option>
         </select>
 
-        {selectVal == null ? (
-          <img
-            src="https://media2.giphy.com/media/1dH0xIDSToAtZYwf8D/giphy.gif"
-            className="scissors"
-          />
-        ) : msg ? (
+        {msg ? (
           <h2 className="msg">{msg}</h2>
-        ) : (
+        ) : selectVal != null ? (
           <div className="days">
-            <div className="days-names">
-              {[0, 1, 2, 3, 4, 5, 6].map((elem) => {
-                return <div className="square">{daysObj[day1 + elem]}</div>;
-              })}
-            </div>
+            {[0, 1, 2, 3, 4, 5, 6].map((elem) => {
+              return <div className="square">{daysObj[day1 + elem]}</div>;
+            })}
+
             {days.map((day, i) => {
               return (
                 <DayBox
@@ -211,6 +197,8 @@ const BusinessPage = ({ user, setUser }) => {
               );
             })}
           </div>
+        ) : (
+          ""
         )}
       </div>
     );

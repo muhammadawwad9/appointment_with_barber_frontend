@@ -10,20 +10,15 @@ import Card from "../Public/Card";
 //Login component
 const MyFavorites = ({ user, setUser }) => {
   const [businesses, setBusinesses] = useState([]);
-  // console.log("businesses is: ", businesses);
 
   //functions
   const getBusinessById = (id) => {
-    // console.log("BUSINESS LENGTH: ", businesses.length);
     if (businesses.length > 0) {
       const business = businesses.filter((business) => business.id == id)[0];
-      // console.log("BUSINEEEEEEEEEEEEEEES: ", business);
       return business;
     }
     return {};
   };
-
-  // console.log("wwwwwwwwwwwwwwwwwww: ", getBusinessById(2));
 
   //useEffect
   useEffect(() => {
@@ -46,7 +41,6 @@ const MyFavorites = ({ user, setUser }) => {
       <div className="MyFavorites">
         <Title title="Favorites" />
         {JSON.parse(user.myFavorites).map((favorite, i) => {
-          // console.log("FAVORITEEEEEEEEEE ", favorite);
           return (
             <Card
               key={favorite}

@@ -35,9 +35,7 @@ const BusAppointments = () => {
     13: "Sa",
   };
 
-  // console.log("selectVAAAAAAAAAAAAAAL: ", selectVal);
   //functions
-
   const changeHandler = (e) => {
     setSelectVal(e.target.value);
   };
@@ -47,7 +45,6 @@ const BusAppointments = () => {
       headers: { token: localStorage.getItem("access_token") },
     })
       .then((business) => {
-        //   console.log("the business issssssssssssssssssss: ", business);
         setBusiness(business);
       })
       .catch((err) => console.error(err));
@@ -63,20 +60,17 @@ const BusAppointments = () => {
           if (calendar.msg) {
             setMsg(calendar.msg);
           } else {
-            // console.log("HERE IS THE CALENDAR: ", calendar);
             const daynumsArr = calendar.map((day) => {
               return {
                 daynum: day.daynum,
                 isworking: day.isworking,
               };
             });
-            console.log(daynumsArr);
             daynumsArr.sort((a, b) => {
               if (a.daynum > b.daynum) return 1;
               else if (a.daynum == b.daynum) return 0;
               else return -1;
             });
-            console.log(daynumsArr);
             setDays(daynumsArr);
             setMsg(null);
           }
@@ -85,7 +79,6 @@ const BusAppointments = () => {
     }
   }, [selectVal]);
 
-  // console.log("BUSINESS STAAATE: ", business);
   {
     return business == null ? (
       <img
@@ -93,7 +86,7 @@ const BusAppointments = () => {
         className="scissors"
       />
     ) : (
-      <div className="BusinessPage">
+      <div className="myBusiness">
         <Title title={business.businessObj.businessname} />
 
         <select onChange={changeHandler}>
