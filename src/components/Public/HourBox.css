@@ -5,10 +5,10 @@
   border-radius: 2px;
   font-size: 20px;
   color: #000000;
-  margin: 0px auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .not-available {

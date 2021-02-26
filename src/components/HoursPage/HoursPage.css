@@ -4,11 +4,16 @@
 }
 
 .HoursPage .hours {
+  width: 420px;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 5px;
-  row-gap: 30px;
-  padding: 0px 60px;
-  align-items: flex-start;
-  justify-content: flex-start;
+  column-gap: 4px;
+  row-gap: 10px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.HoursPage .hours > div {
+  width: 100px;
 }

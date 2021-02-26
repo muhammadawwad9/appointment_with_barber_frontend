@@ -35,16 +35,9 @@ function App() {
   const [state, setState] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-  console.log("USERUSERUSER: ", user);
-  // console.log("IS LOGGED IN : ", isLoggedIn);
-  // console.log("user in app component is: ", user);
   const menuClick = () => {
-    // console.log("clicked!");
     setState(!state);
-    // console.log(state);
   };
-
-  // console.log("isLoggedInnnnnnnnnnnn: ", isLoggedIn);
 
   //useEffect, checking the local storage to see if the user is logged in
   useEffect(() => {

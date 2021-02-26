@@ -13,7 +13,6 @@ const HourBox = ({
   setUser,
   full,
 }) => {
-  console.log("FULLL: ", full);
   //functions
   const clickHandler = () => {
     const obj = {
@@ -21,9 +20,6 @@ const HourBox = ({
       hour: hour,
       businessId: businessId,
     };
-    console.log("The obj(parsed) is: ", obj);
-    console.log("The obj(stringified) is: ", JSON.stringify(obj));
-
     api("appointment", {
       method: "POST",
       headers: {
@@ -33,7 +29,6 @@ const HourBox = ({
       body: JSON.stringify(obj),
     })
       .then((appointments) => {
-        console.log("you appointments are: ", appointments);
         toast.success("The Appointment is Set ", {
           position: toast.POSITION.BOTTOM_CENTER,
         });
@@ -43,7 +38,6 @@ const HourBox = ({
             ...prev,
             myAppointments: appointments.myappointments,
           };
-          console.log("new new: ", newObj);
           return newObj;
         });
       })
