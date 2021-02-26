@@ -38,6 +38,7 @@ const HourBox = ({
             ...prev,
             myAppointments: appointments.myappointments,
           };
+          localStorage.setItem("userObj", JSON.stringify(newObj));
           return newObj;
         });
       })

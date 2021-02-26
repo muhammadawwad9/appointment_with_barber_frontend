@@ -92,15 +92,14 @@ const Card = ({
   {
     return !apCard && !bsCard ? (
       <div className="card">
-        <NavLink exact to={`businesspage/${id}`}>
-          {/* <Link path={`/Profile/${item.id}`} params={{id: item.id}}>  */}{" "}
+        <NavLink exact to={`/businesspage/${id}`}>
           <img
             className="profile-pic"
             src="https://images-na.ssl-images-amazon.com/images/I/51bBDD%2BRa1L._AC_SX355_.jpg"
             alt=""
           />
         </NavLink>
-        <NavLink exact to={`businesspage/${id}`}>
+        <NavLink exact to={`/businesspage/${id}`}>
           <h3 className="business-name">{businessName}</h3>
         </NavLink>
         <img className="location-icon" src="img/location.svg" />
@@ -132,15 +131,14 @@ const Card = ({
       </div>
     ) : bsCard ? (
       <div className="bs-card">
-        <NavLink exact to={`businesspage/${id}`}>
-          {" "}
+        <NavLink exact to={`/businesspage/${id}`}>
           <img
             className="profile-pic"
             src="https://images-na.ssl-images-amazon.com/images/I/51bBDD%2BRa1L._AC_SX355_.jpg"
             alt="profile picture"
           />
         </NavLink>
-        <NavLink exact to={`businesspage/${id}`}>
+        <NavLink exact to={`/businesspage/${id}`}>
           <h3 className="owner-name">
             {ownerFirstName[0].toUpperCase()}
             {ownerFirstName.slice(1)} {ownerLastName[0].toUpperCase()}
@@ -158,15 +156,14 @@ const Card = ({
     ) : (
       // )
       <div className="fav-card">
-        <NavLink exact to={`businesspage/${id}`}>
-          {" "}
+        <NavLink exact to={`/businesspage/${id}`}>
           <img
             className="profile-pic"
             src="https://images-na.ssl-images-amazon.com/images/I/51bBDD%2BRa1L._AC_SX355_.jpg"
             alt="profile picture"
           />
         </NavLink>
-        <NavLink exact to={`businesspage/${id}`}>
+        <NavLink exact to={`/businesspage/${id}`}>
           <h3 className="business-name-fav">{businessName}</h3>
         </NavLink>
         <h3 className="time">
@@ -178,7 +175,6 @@ const Card = ({
           alt="delete"
           onClick={deleteAppointment}
         />
-        {/* <img className="edit-icon" src="img/edit.svg" alt="edit" /> */}
         <div className="edge"></div>
       </div>
     );

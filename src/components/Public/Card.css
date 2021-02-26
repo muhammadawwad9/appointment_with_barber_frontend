@@ -115,7 +115,7 @@
   left: 85%;
   top: 50%;
   transform: translate(-2px, -50%);
-
+  cursor: pointer;
   width: 23px;
   height: 23px;
 }
