@@ -133,8 +133,14 @@ const BusinessPage = ({ user, setUser }) => {
       <div className="BusinessPage">
         <Title title={business.businessObj.businessname} />
         <div>
-          {user.myFavorites &&
-          user.myFavorites.indexOf(String(businessId)) == -1 ? (
+          {user.myFavorites == null ? (
+            <img
+              className="favorite-icon empty"
+              src="/img/emptystar.svg"
+              alt=""
+              onClick={favToggle}
+            />
+          ) : user.myFavorites.indexOf(String(businessId)) == -1 ? (
             <img
               className="favorite-icon empty"
               src="/img/emptystar.svg"
