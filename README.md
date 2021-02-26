@@ -5,7 +5,7 @@ This is a waste of time, for the barber, the customer who is getting a haircut a
 This website helps customers and businesses to make the scheduling process smoother and save some time.
 </p>
 
-## Technologies used:
+## Technologies used in the frontend:
 - HTML
 - -CSS
 - -React
