@@ -7,7 +7,7 @@ This website helps customers and businesses to make the scheduling process smoot
 
 ## Technologies used in the frontend:
 - HTML
-- -CSS
+- CSS
 - React
 
 <h1 align="center"><a href="https://cranky-babbage-f1c5b5.netlify.app/">TRY THE WEBSITE HERE</a></h1>
