@@ -105,7 +105,6 @@ const Card = ({
         </NavLink>
         <img className="location-icon" src="img/location.svg" />
         <h3 className="location">{location}</h3>
-        <h3 className="avg">{avg}/5</h3>
         {user.myFavorites == null ? (
           <img
             className="favorite-icon empty"

@@ -45,7 +45,6 @@ const MyBusinessCard = ({
         </div>
         <img className="location-icon" src="img/location.svg" />
         <h3 className="location">{location}</h3>
-        <h3 className="avg">{avg}/5</h3>
 
         <div className="edge"></div>
       </div>
