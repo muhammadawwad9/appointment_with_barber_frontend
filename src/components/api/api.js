@@ -8,13 +8,7 @@ const api = (url, options) => {
     ...options,
   })
     .then((response) => {
-      //if (response.ok) return response.json();
       return response.json();
-      /* else {
-        const error = new Error("http error");
-        error.status = response.status;
-        throw error;
-      }*/
     })
     .catch((err) => console.error(err));
 };
