@@ -10,4 +10,4 @@ This website helps customers and businesses to make the scheduling process smoot
 - -CSS
 - -React
 
-<h1><a href="https://cranky-babbage-f1c5b5.netlify.app/">TRY IT HERE</a></h1>
+<h1 text-align="center"><a href="https://cranky-babbage-f1c5b5.netlify.app/">TRY IT HERE</a></h1>
