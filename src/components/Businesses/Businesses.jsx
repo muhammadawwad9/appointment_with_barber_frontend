@@ -36,6 +36,7 @@ const Businesses = ({ user, setUser }) => {
         placeholder="Search a barber shop..."
         onChangeFunc={onChangeHandler}
         value={insertedWord}
+        search={true}
       />
       <h2>Barber shops available:</h2>
       <div className="businesses-list">

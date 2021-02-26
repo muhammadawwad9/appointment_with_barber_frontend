@@ -5,10 +5,9 @@ const Inputs = (props) => {
   const [state, setState] = React.useState(props.value);
   const handleState = (e) => {
     setState(e.target.value);
-    if (props.onChangeFunc) {
-      props.onChangeFunc(e);
-    }
+    if (props.onChangeFunc) props.onChangeFunc(e);
   };
+
   React.useEffect(() => {
     setState(props.value);
   }, [props.value]);
@@ -22,8 +21,8 @@ const Inputs = (props) => {
         name={props.name}
         placeholder={props.placeholder}
         required
-        onChange={(e) => props.onChangeFunc(e)}
-        value={props.value}
+        onChange={(e) => handleState(e)}
+        value={props.search ? props.value : state}
       />
     </div>
   );
