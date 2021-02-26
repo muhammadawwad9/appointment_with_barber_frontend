@@ -2,11 +2,11 @@ import React from "react";
 import "./inputs.css";
 //props icon, placeholder, type
 const Inputs = (props) => {
-  const [state, setState] = React.useState(props.value || "");
+  const [state, setState] = React.useState(props.value);
   const handleState = (e) => {
     setState(e.target.value);
-    if (props.onChangeFunc(e) || null) {
-      // props.onChangeFunc();
+    if (props.onChangeFunc) {
+      props.onChangeFunc(e);
     }
   };
   React.useEffect(() => {
@@ -22,8 +22,8 @@ const Inputs = (props) => {
         name={props.name}
         placeholder={props.placeholder}
         required
-        onChange={handleState}
-        value={state}
+        onChange={(e) => props.onChangeFunc(e)}
+        value={props.value}
       />
     </div>
   );

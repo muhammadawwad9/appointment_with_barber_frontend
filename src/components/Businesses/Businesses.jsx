@@ -23,7 +23,7 @@ const Businesses = ({ user, setUser }) => {
 
   //functions
   const onChangeHandler = (e) => {
-    setInsertedWord(e.target.value);
+    setInsertedWord(e.target.value.replace("/", "").replace(".", ""));
   };
 
   return (
@@ -35,6 +35,7 @@ const Businesses = ({ user, setUser }) => {
         name="search-input"
         placeholder="Search a barber shop..."
         onChangeFunc={onChangeHandler}
+        value={insertedWord}
       />
       <h2>Barber shops available:</h2>
       <div className="businesses-list">
