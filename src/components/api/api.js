@@ -4,7 +4,7 @@ const api = (url, options) => {
   const server = `http://localhost:4000/`;
   const heroku = "https://barber-appointment-backend.herokuapp.com/";
 
-  return fetch(`${heroku}${url}`, {
+  return fetch(`${server}${url}`, {
     ...options,
   })
     .then((response) => {
