@@ -18,8 +18,3 @@
 .HoursPage .hours > div {
   width: 100px;
 }
-
-.HoursPage .hours > div:last-of-type {
-  border: 2px solid red;
-  justify-self: start;
-}
